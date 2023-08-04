@@ -7,6 +7,7 @@ const {
   getMoviesBySubstring,
   getMoviesLimit,
   getMoviesById,
+  getMovieCard,
   addRow,
   deleteRow,
   updateRow,
@@ -59,6 +60,12 @@ router.get("/limit/:num", checkNum, async (req, res) => {
 
 router.get("/:id", checkId, async (req, res) => {
   const movie = await getMoviesById(req.params.id);
+  if (movie[0]) res.json(movie);
+  else res.status(500).json({ err: "pg error" });
+});
+
+router.get("/card/:id", checkId, async (req, res) => {
+  const movie = await getMovieCard(req.params.id);
   if (movie[0]) res.json(movie);
   else res.status(500).json({ err: "pg error" });
 });
