@@ -14,9 +14,11 @@ app.use("/movies", movieController);
 app.use("/collections", collController);
 
 app.get("/", (req, res) => {
-  res.send("Welcome to FormidulosusWiki");
+  res.send("Welcome to FormidulosusDB");
 });
-app.get('/notfound', (req, res) => { res.status(404).send('invalid request') })
+app.get("/notfound", (req, res) => {
+  res.status(404).send("invalid request");
+});
 
 app.get("*", (req, res) => {
   res.status(404).send("Page not found");
