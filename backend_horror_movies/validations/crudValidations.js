@@ -81,10 +81,11 @@ const checkPut = (req, res, next) => {
 };
 
 module.exports = {
-  checkTD,
-  checkSearch,
-  checkId,
-  checkNum,
-  checkPost,
-  checkPut,
-};
+    checkTD,
+    checkSearch,
+    checkId,
+    checkNum,
+    checkPost,
+    checkPut,
+  };
+
