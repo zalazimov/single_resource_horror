@@ -74,6 +74,20 @@ async function getMoviesById(id) {
   return movie;
 }
 
+//get movie card info with banner
+async function getMovieCard(id) {
+  const movie = await db
+    .any(
+      "select h.*, backdrop_path from horrmovies h left join banners on h.id = banners.id where h.id = $1",
+      id
+    )
+    .then((res) => res)
+    .catch((e) => {
+      return e;
+    });
+  return movie;
+}
+
 //get the collections and movies stored in the database
 async function getCollections() {
   const collections = await db
@@ -154,6 +168,7 @@ module.exports = {
   getMoviesBySubstring,
   getMoviesLimit,
   getMoviesById,
+  getMovieCard,
   getCollections,
   getCollById,
   addRow,
