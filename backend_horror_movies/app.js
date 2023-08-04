@@ -14,7 +14,7 @@ app.use("/movies", movieController);
 app.use("/collections", collController);
 
 app.get("/", (req, res) => {
-  res.send("Welcome to horror movie db");
+  res.send("Welcome to FormidulosusWiki");
 });
 app.get('/notfound', (req, res) => { res.status(404).send('invalid request') })
 
