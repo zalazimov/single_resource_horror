@@ -5,10 +5,26 @@ import Home from "./components/Home/Home";
 import Movie from "./components/Movie/Movie";
 import Movies from "./components/Movies/Movies";
 import Nav from "./components/Nav/Nav";
+import axios from 'axios'
+import { movieContext } from "./components/Context/context";
+import { useState, useEffect, useContext } from 'react'
 
 import "./App.css";
 
 function App() {
+
+  const [movies, setMovies] = useState(null)
+  async function getMovies() {
+    return [];
+  }
+
+  const movieContextValue = {
+    setMovies,
+  }
+
+  useEffect(() => {
+    getMovies();
+  },[])
   return (
     <div className="App">
       <Router>
