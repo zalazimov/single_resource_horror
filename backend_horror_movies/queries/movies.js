@@ -116,16 +116,6 @@ async function addRow(args) {
 }
 
 //deleting a movie entry
-async function updateRow(args, id) {
-    let arr = Object.keys(args)
-    let vals = Object.values(args)
-    try {
-        const Row = await db.any(`UPDATE horrmovies SET ${arr.map((item, i) => {return `${item} = '${vals[i]}'`}).join(', ')} where
-        id = $1 RETURNING *`, id);
-        return Row;
-    } catch (e) { return e }
-};
-
 async function deleteRow(args) {
   try {
     const Del = await db.any(

@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-
 const {
   getMovies,
   getMoviesByTD,
@@ -37,7 +36,6 @@ router.get("/search", checkSearch, async (req, res, next) => {
     else res.status(500).json({ err: "pg error" });
   } else next();
 });
-
 
 router.get("/", checkTD, async (req, res, next) => {
   if (req.query.title) {
