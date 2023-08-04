@@ -1,7 +1,11 @@
 const db = require('../db/dbConfig');
 
 async function getMovies() {
-    const someMovie = await db.any('select * from horrmovies limit 20').then(res => res).catch(e => { throw e })
+    const someMovie = await db.any('select * from horrmovies').then(res => res).catch(e => { throw e })
+    return someMovie
+}
+async function getMoviesLimit(args) {
+    const someMovie = await db.any(`select * from horrmovies limit ${args}`).then(res => res).catch(e => { throw e })
     return someMovie
 }
 //get movie by original title and release_date
@@ -13,7 +17,7 @@ async function getMoviesById(id) {
     const movie = await db.any('select * from horrmovies where id = $1', id).then(res => res).catch(e => { throw e })
     return movie
 }
-
+//get the collections and movies stored in the database
 async function getCollections() {
     const collections = await db.any(`select distinct collection_name, collection from horrmovies where collection_name is not null 
     and collection is not null order by collection`).then(res => res).catch(e => { throw e })
@@ -40,4 +44,4 @@ async function deleteRow(args) {
     } catch (e) { return e }
 };
 
-module.exports = { getMovies, getMoviesByTD, getMoviesById, getCollections, getCollById, addRow, deleteRow, }
+module.exports = { getMovies, getMoviesByTD, getMoviesLimit, getMoviesById, getCollections, getCollById, addRow, deleteRow, }

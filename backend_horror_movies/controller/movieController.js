@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const { getMovies, getMoviesByTD, getMoviesById, addRow, deleteRow, } = require('../queries/movies');
-const { checkTD, checkId, checkPost } = require('../validations/crudValidations')
+const { getMovies, getMoviesByTD, getMoviesLimit, getMoviesById, addRow, deleteRow, } = require('../queries/movies');
+const { checkTD, checkId, checkNum, checkPost } = require('../validations/crudValidations')
 
 router.get("/", checkTD, async (req, res, next) => {
   if (req.query.title) {
@@ -14,6 +14,12 @@ router.get("/", checkTD, async (req, res, next) => {
 router.get("/", async (req, res) => {
   const movies = await getMovies();
   if (movies[0]) res.json(movies);
+  else res.status(500).json({ err: 'pg error' })
+});
+
+router.get("/limit/:num", checkNum, async (req, res) => {
+  const movie = await getMoviesLimit(req.params.num);
+  if (movie[0]) res.json(movie);
   else res.status(500).json({ err: 'pg error' })
 });
 
