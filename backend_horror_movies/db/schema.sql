@@ -28,3 +28,8 @@ CREATE TABLE public.horrmovies (
 	CONSTRAINT check_both_null_or_not_null CHECK ((((collection IS NULL) AND (collection_name IS NULL)) OR ((collection IS NOT NULL) AND (collection_name IS NOT NULL)))),
 	CONSTRAINT horrmovies_pkey PRIMARY KEY (id)
 );
+
+CREATE TABLE public.banners (
+	id int8 NULL,
+	backdrop_path text NULL
+);
