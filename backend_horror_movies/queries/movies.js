@@ -6,7 +6,7 @@ async function getMovies() {
     .any("select * from horrmovies ORDER BY id")
     .then((res) => res)
     .catch((e) => {
-      throw e;
+      return e;
     });
   return someMovie;
 }
@@ -17,7 +17,7 @@ async function getMoviesLimit(args) {
     .any(`select * from horrmovies ORDER BY id limit ${args}`)
     .then((res) => res)
     .catch((e) => {
-      throw e;
+      return e;
     });
   return someMovie;
 }
@@ -30,7 +30,7 @@ async function getMoviesByTD(title, date) {
     )
     .then((res) => res)
     .catch((e) => {
-      throw e;
+      return e;
     });
   return someMovie;
 }
@@ -44,10 +44,11 @@ async function getMoviesByTitle(title) {
     )
     .then((res) => res)
     .catch((e) => {
-      throw e;
+      return e;
     });
   return someMovie;
 }
+
 //get movie by title that contains substring entered
 async function getMoviesBySubstring(title) {
   const someMovie = await db
@@ -57,7 +58,7 @@ async function getMoviesBySubstring(title) {
     )
     .then((res) => res)
     .catch((e) => {
-      throw e;
+      return e;
     });
   return someMovie;
 }
@@ -68,10 +69,11 @@ async function getMoviesById(id) {
     .any("select * from horrmovies where id = $1", id)
     .then((res) => res)
     .catch((e) => {
-      throw e;
+      return e;
     });
   return movie;
 }
+
 //get the collections and movies stored in the database
 async function getCollections() {
   const collections = await db
@@ -81,7 +83,7 @@ async function getCollections() {
     )
     .then((res) => res)
     .catch((e) => {
-      throw e;
+      return e;
     });
   return collections;
 }
@@ -91,7 +93,7 @@ async function getCollById(id) {
     .any("select * from horrmovies where collection = $1", id)
     .then((res) => res)
     .catch((e) => {
-      throw e;
+      return e;
     });
   return coll;
 }
