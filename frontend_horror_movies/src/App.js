@@ -21,10 +21,6 @@ function App() {
   const movieContextValue = {
     setMovies,
   }
-
-  useEffect(() => {
-    getMovies();
-  },[])
   return (
     <div className="App">
       <Router>
