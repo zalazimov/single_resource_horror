@@ -87,6 +87,17 @@ async function getMovieCard(id) {
     });
   return movie;
 }
+async function getHomeInfo() {
+  const movie = await db
+    .any(
+      "select distinct h.original_title, h.*, backdrop_path from horrmovies h join banners on h.id = banners.id order by h.id, h.release_date desc"
+    )
+    .then((res) => res)
+    .catch((e) => {
+      return e;
+    });
+  return movie;
+}
 
 //get the collections and movies stored in the database
 async function getCollections() {
@@ -169,6 +180,7 @@ module.exports = {
   getMoviesLimit,
   getMoviesById,
   getMovieCard,
+  getHomeInfo,
   getCollections,
   getCollById,
   addRow,
