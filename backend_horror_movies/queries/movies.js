@@ -90,7 +90,8 @@ async function getMovieCard(id) {
 async function getHomeInfo() {
   const movie = await db
     .any(
-      "select distinct h.original_title, h.*, backdrop_path from horrmovies h join banners on h.id = banners.id order by h.id, h.release_date desc"
+      `select distinct h.original_title, h.*, backdrop_path from horrmovies h join banners on h.id = banners.id where 
+      poster_path is not null order by h.id, h.release_date desc`
     )
     .then((res) => res)
     .catch((e) => {

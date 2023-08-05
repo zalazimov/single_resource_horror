@@ -1,48 +1,61 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useEffect, useContext } from "react";
+import { MovieContext } from "../Context/context";
 import { Link } from "react-router-dom";
-const API = process.env.REACT_APP_API_URL;
+import { useNavigate } from "react-router-dom";
+import { fetchMoviesData } from "../api";
+import MainImage from "./MainImage";
+import Overlay from "../../common/Overlay";
 
 function Movies() {
-  const [movies, setMovies] = useState([]);
+  const navigate = useNavigate()
 
-  async function fetchMoviesData() {
-    try {
-      const result = await axios.get(`${API}/movies/limit/20`);
-      //   console.log(result.data);
-      setMovies(result.data);
-    } catch (e) {
-      console.log(e);
-    }
-  }
+  const { movies, setMovies, isLoading, setIsLoading, } = useContext(MovieContext);
 
   useEffect(() => {
-    fetchMoviesData();
+    setIsLoading(true)
+    fetchMoviesData().then(res => {
+      let arr = [];
+      while (arr.length < 10) {
+        let n = Math.floor(Math.random() * res.data.length)
+        if (!arr.includes(n)) arr.push(n)
+      }
+      setIsLoading(false)
+      setMovies(() => arr.map(item => res.data[item]))
+    }
+    ).catch(e => navigate('/404'));
   }, []);
 
   return (
     <div>
-      <div className="container text-center">
-        <main className="row my-5">
-          {movies &&
-            movies.map((movie) => {
-              return (
-                <div key={movie.id} className="col-lg-3 col-md-4 col-sm-6 mb-4">
-                  <Link to={`/movies/${movie.id}`}>
-                    <img
-                      src={`https://image.tmdb.org/t/p/w1280${movie.poster_path}`}
-                      alt={movie.title}
-                      height="250 px"
-                    ></img>
-                    <p className="mt-1 fs-6">
-                      {movie.original_title} ({movie.release_date.slice(0, 4)})
-                    </p>
-                  </Link>
-                </div>
-              );
-            })}
-        </main>
-      </div>
+      <Overlay isLoading={isLoading}>
+        <div className="container my-4">
+          <>
+            {
+              movies && <MainImage images={movies} />
+            }
+          </>
+          <section className="row text-center">
+            {movies &&
+              movies.map((movie) => {
+                return (
+                  <div key={movie.id} className="col-lg-3 col-md-4 col-sm-6 mb-4">
+                    <Link to={`/movies/${movie.id}`}>
+                      <img
+                        src={`https://image.tmdb.org/t/p/w1280${movie.poster_path}`}
+                        alt={movie.original_title}
+                        height="250 px"
+                        className="rounded-1"
+                      ></img>
+                      <p className="mt-1 fs-6">
+                        {movie.original_title} ({movie.release_date.slice(0, 4)})
+                      </p>
+                    </Link>
+                  </div>
+                );
+              })}
+          </section>
+        </div>
+      </Overlay>
     </div>
   );
 }

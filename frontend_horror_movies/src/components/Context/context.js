@@ -1,3 +1,3 @@
 import React from "react";
 
-export const movieContext = React.createContext()
+export const MovieContext = React.createContext()

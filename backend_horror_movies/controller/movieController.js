@@ -24,7 +24,7 @@ const {
 
 router.get("/", async (req, res, next) => {
   if (req.query.title && !req.query.date) {
-    const movies = await getMoviesByTitle(req.query.title);
+    const movies = await getMoviesByTitle(req.query.title.trim());
     if (movies[0]) res.json(movies);
     else res.status(500).json({ err: "pg error" });
   } else next();
