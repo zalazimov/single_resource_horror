@@ -1,19 +1,19 @@
-import React from "react";
+import React,{ useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import CreateMovie from "./components/CreateMovie/CreateMovie";
 import EditMovie from "./components/EditMovie/EditMovie";
-import SearchRes from "./components/SearchRes/SearchRes";
-import Movies from "./components/Movies/Movies";
 import Nav from "./components/Nav/Nav";
 import { MovieContext } from "./components/Context/context";
-import { useState } from 'react'
 import Spinner from "./common/Spinner";
-
+import { posterImage, formatDate, } from "./components/helper";
+import CreateMovie from "./components/CreateMovie/CreateMovie";
 import "./App.css";
+
 
 function App() {
   const Home = React.lazy(() => import("./components/Movies/Movies"));
   const Movie = React.lazy(() => import("./components/Movie/Movie"));
+  const SearchRes = React.lazy(() => import("./components/SearchRes/SearchRes"));
+  const Movies = React.lazy(() => import("./components/Movies/Movies"));
 
   const [movies, setMovies] = useState(null);
   const [movie, setMovieById] = useState(null);
@@ -29,6 +29,8 @@ function App() {
     setIsLoading,
     results,
     setResults,
+    posterImage,
+    formatDate,
   }
   return (
     <div className="App">
@@ -42,7 +44,7 @@ function App() {
           <Route path="/movies" element={<Movies />} />
           <Route path="/movies/:id" element={<Movie />} />
           <Route path="/search" element={<SearchRes />} />
-          <Route path="/" element={<CreateMovie />} />
+          <Route path="/create" element={<CreateMovie />} />
           <Route path="/:id" element={<EditMovie />} />
           <Route path="/404" element={<h1>404 Error Not Found</h1>} />
           <Route path="*" element={<h1>404 Error Not Found</h1>} />

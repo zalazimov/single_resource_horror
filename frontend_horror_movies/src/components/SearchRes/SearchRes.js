@@ -4,19 +4,13 @@ import { Link } from "react-router-dom";
 import { useNavigate, useLocation } from "react-router-dom";
 import { fetchBySubstring } from "../api";
 import Overlay from "../../common/Overlay";
-import { stockposter } from "../../assets";
 
 function SearchRes() {
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
     const query = searchParams.get('query');
-    const { results, setResults, setIsLoading, isLoading, } = useContext(MovieContext);
+    const { results, setResults, setIsLoading, isLoading, posterImage, } = useContext(MovieContext);
     const navigate = useNavigate()
-
-    function posterImage(args) {
-        if (args.poster_path) return `https://image.tmdb.org/t/p/w1280${args.poster_path}`
-        else if (!args.poster_path) return stockposter;
-    }
 
     useEffect(() => {
         setIsLoading(true)
