@@ -43,7 +43,8 @@ function Movies() {
                       <img
                         src={`https://image.tmdb.org/t/p/w1280${movie.poster_path}`}
                         alt={movie.original_title}
-                        height="250 px"
+                        height="250px"
+                        width="180px"
                         className="rounded-1"
                       ></img>
                       <p className="mt-1 fs-6">
