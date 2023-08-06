@@ -24,7 +24,7 @@ function Movie() {
               <div className="col-md-6 py-2 px-5">
                 {movie.revenue ? <h2>Revenue: {movie.revenue}</h2> : " "}
                 {movie.popularity ? <h2>Popularity: {movie.popularity}</h2> : " "}
-                <h4>running time <span className="badge bg-info">{movie.runtime ? movie.runtime : '64'}m</span></h4>
+                <h4>running time <span className="badge bg-info">{movie.runtime > 0 ? movie.runtime : '64'}m</span></h4>
                 <h4>release date <span className="badge bg-info">{formatDate(movie.release_date)}</span></h4>
                 <p>Lang: {movie.original_language}</p>
               </div>

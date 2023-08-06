@@ -18,7 +18,6 @@ export function posterImage(args, flag) {
 
 export function formatDate(args) {
   const date = new Date(args);
-
   const options = { year: "numeric", month: "long", day: "numeric" };
   const formattedDate = date.toLocaleDateString("en-US", options);
 
@@ -125,4 +124,23 @@ export function selectLan() {
     "kl",
     "no",
   ];
+}
+
+export function inputFields() {
+    //vote_average budget runtime
+    return ['original_title', 'title', 'overview', 'tagline', 'poster_path', 1, 2, 3, 'genre_names']
+}
+
+export function generateDates() {
+    const today = new Date();
+    const dates = [];
+
+    for (let i = 0; i < 90; i++) {
+        const date = new Date(today);
+        date.setDate(date.getDate() - i);
+        const formattedDate = date.toISOString().slice(0, 10);
+        dates.push(formattedDate);
+    }
+
+    return dates;
 }
