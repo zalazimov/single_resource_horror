@@ -4,6 +4,7 @@ const morgan = require("morgan");
 
 const collController = require("./controller/collController");
 const movieController = require("./controller/movieController");
+const homeController = require("./controller/homeController");
 
 const app = express();
 
@@ -12,6 +13,7 @@ app.use(express.json());
 app.use(morgan("dev"));
 app.use("/movies", movieController);
 app.use("/collections", collController);
+app.use("/home", homeController);
 
 app.get("/", (req, res) => {
   res.send("Welcome to FormidulosusDB");
