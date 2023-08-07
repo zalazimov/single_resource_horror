@@ -1,30 +1,48 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
-import { selectLan, validateForm, genreNames, generateDates, } from "../helper";
+import { selectLan, validateForm, genreNames, generateDates } from "../helper";
 import { newEntry } from "../api";
 
 function CreateMovie() {
   let navigate = useNavigate();
   const dates = generateDates();
-  const [selectedOptions, setSelectedOptions] = useState(['Horror']);
+  const [selectedOptions, setSelectedOptions] = useState(["Horror"]);
   const [entry, setEntry] = useState({
-    'original_title': '', 'title': '', 'overview': '', 'vote_count': 1, 'tagline': '', 'poster_path': '', 'vote_average': 3.0,
-    'budget': 0, 'runtime': 64, 'genre_names': 'Horror',
-    'release_date': new Date(), 'status': 'Released', 'original_language': 'en', 'revenue': 0
+    original_title: "",
+    title: "",
+    overview: "",
+    vote_count: 1,
+    tagline: "",
+    poster_path: "",
+    vote_average: 3.0,
+    budget: 0,
+    runtime: 64,
+    genre_names: "Horror",
+    release_date: new Date(),
+    status: "Released",
+    original_language: "en",
+    revenue: 0,
   });
 
   const handleSelectChange = (event) => {
-    let selectedValues = Array.from(event.target.selectedOptions, option => option.value);
-    if (!selectedValues.length) selectedValues = ['Horror']
+    let selectedValues = Array.from(
+      event.target.selectedOptions,
+      (option) => option.value
+    );
+    if (!selectedValues.length) selectedValues = ["Horror"];
     setSelectedOptions(selectedValues);
-    setEntry({ ...entry, ['genre_names']: selectedValues.join(', ') })
+    setEntry({ ...entry, ["genre_names"]: selectedValues.join(", ") });
   };
 
   async function handleSubmit(e) {
     e.preventDefault();
     console.log(entry);
     try {
-      if (!validateForm.every(item => entry[item] !== '' || entry[item] !== null)) {
+      if (
+        !validateForm.every(
+          (item) => entry[item] !== "" || entry[item] !== null
+        )
+      ) {
         alert(
           "Please enter some information for either the overview or the tagline!"
         );
@@ -213,7 +231,9 @@ function CreateMovie() {
                 id="genre_names"
               >
                 {genreNames.map((option, i) => (
-                  <option key={`${option.substring(0, 2)}${i}`} value={option}>{option}</option>
+                  <option key={`${option.substring(0, 2)}${i}`} value={option}>
+                    {option}
+                  </option>
                 ))}
               </select>
             </div>
@@ -230,6 +250,3 @@ function CreateMovie() {
 }
 
 export default CreateMovie;
-
-
-
