@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { MovieContext } from "../Context/context";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -8,8 +8,9 @@ import Overlay from "../../common/Overlay";
 
 function Movies() {
   const navigate = useNavigate();
+  const [movies, setMovies] = useState(null)
 
-  const { movies, setMovies, isLoading, setIsLoading } = useContext(MovieContext);
+  const { isLoading, setIsLoading } = useContext(MovieContext);
 
   useEffect(() => {
     setIsLoading(true);
@@ -20,15 +21,15 @@ function Movies() {
           let n = Math.floor(Math.random() * res.data.length);
           if (!arr.includes(n)) arr.push(n);
         }
-        setIsLoading(false);
         setMovies(() => arr.map((item) => res.data[item]));
+        setIsLoading(false);
       })
       .catch((e) => navigate("/404"));
   }, []);
 
   return (<Overlay isLoading={isLoading}>
         <div className="container py-4">
-          <>{movies && <MainImage images={movies} />}</>
+          <>{ movies && <MainImage images={movies} />}</>
           <section className="row text-center">
             {movies &&
               movies.map((movie) => {

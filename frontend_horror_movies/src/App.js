@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import EditMovie from "./components/EditMovie/EditMovie";
 import Nav from "./components/Nav/Nav";
+import Home from "./components/Home/Home";
 import CreateMovie from "./components/CreateMovie/CreateMovie";
 import { MovieContext } from "./components/Context/context";
 import Spinner from "./common/Spinner";
@@ -9,22 +10,16 @@ import { posterImage, formatDate } from "./components/helper";
 import "./App.css";
 
 function App() {
-  const Home = React.lazy(() => import("./components/Movies/Movies"));
+  const Movies = React.lazy(() => import("./components/Movies/Movies"));
   const Movie = React.lazy(() => import("./components/Movie/Movie"));
   const Index = React.lazy(() => import("./components/DBIndex/Index"));
-  const SearchRes = React.lazy(() =>
-    import("./components/SearchRes/SearchRes")
-  );
-  const Movies = React.lazy(() => import("./components/Movies/Movies"));
+  const SearchRes = React.lazy(() =>import("./components/SearchRes/SearchRes"));
 
-  const [movies, setMovies] = useState(null);
   const [movie, setMovieById] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [results, setResults] = useState(null);
 
   const movieContextValue = {
-    setMovies,
-    movies,
     movie,
     setMovieById,
     isLoading,
