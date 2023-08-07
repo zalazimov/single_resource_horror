@@ -23,9 +23,7 @@ function SearchRes() {
       .catch((e) => navigate("/movies"));
   }, [query]);
 
-  return (
-    <div>
-      <Overlay isLoading={isLoading}>
+  return (<Overlay isLoading={isLoading}>
         <div className="container my-4">
           <section className="row text-center">
             {results &&
@@ -59,7 +57,6 @@ function SearchRes() {
           </section>
         </div>
       </Overlay>
-    </div>
   );
 }
 

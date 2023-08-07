@@ -11,9 +11,26 @@ export async function fetchMoviesData() {
   }
 }
 
+export async function fetchIndexData() {
+  try {
+    const result = await axios.get(`${API2}/movies/limit/500`);
+    return result;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
 export async function fetchMovieById(id) {
   try {
     const result = await axios.get(`${API2}/movies/card/${id}`);
+    return result;
+  } catch (e) {
+    console.log(e);
+  }
+}
+export async function deleteMovieById(id) {
+  try {
+    const result = await axios.delete(`${API2}/movies/${id}`);
     return result;
   } catch (e) {
     console.log(e);
@@ -45,6 +62,15 @@ export async function fetchBySubstring(title) {
 export async function newEntry(entry) {
   try {
     const result = await axios.post(`${API2}/movies`, entry);
+    return result;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+export async function editMovieInDB(body, id) {
+  try {
+    const result = await axios.put(`${API2}/movies/${id}`, body);
     return result;
   } catch (e) {
     console.log(e);
