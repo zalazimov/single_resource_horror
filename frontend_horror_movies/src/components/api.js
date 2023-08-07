@@ -11,9 +11,26 @@ export async function fetchMoviesData() {
   }
 }
 
+export async function fetchIndexData() {
+  try {
+    const result = await axios.get(`${API2}/movies/limit/500`);
+    return result;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
 export async function fetchMovieById(id) {
   try {
     const result = await axios.get(`${API2}/movies/card/${id}`);
+    return result;
+  } catch (e) {
+    console.log(e);
+  }
+}
+export async function deleteMovieById(id) {
+  try {
+    const result = await axios.delete(`${API2}/movies/${id}`);
     return result;
   } catch (e) {
     console.log(e);

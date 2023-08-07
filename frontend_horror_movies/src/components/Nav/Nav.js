@@ -24,8 +24,8 @@ function Nav() {
             </Link>
           </li>
           <li className="nav-item px-5">
-            <Link className="nav-link" to="/collections">
-              Collections
+            <Link className="nav-link" to="/index">
+              Index
             </Link>
           </li>
           <li className="nav-item px-5">

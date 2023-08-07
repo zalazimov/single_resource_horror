@@ -9,8 +9,7 @@ import Overlay from "../../common/Overlay";
 function Movies() {
   const navigate = useNavigate();
 
-  const { movies, setMovies, isLoading, setIsLoading } =
-    useContext(MovieContext);
+  const { movies, setMovies, isLoading, setIsLoading } = useContext(MovieContext);
 
   useEffect(() => {
     setIsLoading(true);
@@ -27,9 +26,7 @@ function Movies() {
       .catch((e) => navigate("/404"));
   }, []);
 
-  return (
-    <>
-      <Overlay isLoading={isLoading}>
+  return (<Overlay isLoading={isLoading}>
         <div className="container py-4">
           <>{movies && <MainImage images={movies} />}</>
           <section className="row text-center">
@@ -58,9 +55,7 @@ function Movies() {
               })}
           </section>
         </div>
-      </Overlay>
-    </>
-  );
+      </Overlay>);
 }
 
 export default Movies;

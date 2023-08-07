@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import MainImage from "../Movies/MainImage";
-import { selectLan, validateForm, genreNames, generateDates, } from "../helper";
+import { selectLan, validateForm, compareObjects, genreNames, generateDates, } from "../helper";
 import { fetchMovieById, editMovieInDB, } from "../api";
 import { MovieContext } from "../Context/context";
 import { FaTrash, FaEdit } from 'react-icons/fa';
+import DeleteMovie from "./DeleteMovie";
 import Overlay from "../../common/Overlay";
 
 function Movie() {
@@ -16,6 +17,7 @@ function Movie() {
   const [showForm, setShowForm] = useState(null)
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [entry, setEntry] = useState({});
+  const [showDel, setShowDel] = useState(false);
   const navigate = useNavigate()
 
   const handleSelectChange = (event) => {
@@ -26,19 +28,26 @@ function Movie() {
   };
 
   useEffect(() => {
+    setIsLoading(true)
     fetchMovieById(id).then(res => { setIsLoading(false); setMovie(res.data[0]); setEntry(res.data[0]); }).catch(e => navigate('/404'))
   }, [id]);
 
   const handleCloseModal = () => {
     setShowForm(false);
   };
+
   const handleClickIcons = () => {
     setSelectedOptions(() => entry.genre_names.split(','));
     setShowForm(true);
+  }
+
+  const handleClickTrash = () => {
+    setShowDel(true)
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!validateForm.every(item => entry[item] !== '' || entry[item] !== null)) {
+    if (compareObjects(entry, movie) || !validateForm.every(item => entry[item] !== '' || entry[item] !== null)) {
       alert(
         "Please enter on more fields"
       );
@@ -48,34 +57,35 @@ function Movie() {
     Object.keys(entry).forEach(item => { if (entry[item] === '' || !entry[item]) delete entry[item] })
     await editMovieInDB(entry, id).then(res => { setShowForm(false); setMovie(res.data); setEntry(res.data); }).catch(e => console.log(e));
     setShowForm(false)
-
   }
 
   function handleMovieInput(e) {
     setEntry({ ...entry, [e.target.name]: e.target.value });
   }
 
-  return <div className="container my-4">
-    <Overlay isLoading={isLoading}>
+  return <Overlay isLoading={isLoading}>
+    <div className="container my-4">
       {
         movie && <> <MainImage images={[movie]} />
           <main className="container">
             <div className="row">
               <div className="col-md-6 py-2 px-5">
-                {movie.revenue ? <h2>Revenue: {movie.revenue}</h2> : " "}
-                {movie.popularity ? <h2>Popularity: {movie.popularity}</h2> : " "}
-                <h4>running time <span className="badge bg-info">{movie.runtime > 0 ? movie.runtime : '64'}m</span></h4>
-                <h4>release date <span className="badge bg-info">{formatDate(movie.release_date)}</span></h4>
-                <p>Overview: {movie.overview || movie.tagline}</p>
-                <p>Lang: {movie.original_language}</p>
-                <div onClick={handleClickIcons}>
-                  <FaTrash
-                    className="icon delete-icon"
-                  />
-                  <FaEdit
-                    className="icon edit-icon"
-                  />
+                <div className="bg-secondary p-3 rounded-2">
+                  {movie.revenue ? <h2>Revenue: {movie.revenue}</h2> : " "}
+                  {movie.popularity ? <h2>Popularity: {movie.popularity}</h2> : " "}
+                  <h4>running time <span className="badge bg-info">{movie.runtime > 0 ? movie.runtime : '64'}m</span></h4>
+                  <h4>release date <span className="badge bg-info">{formatDate(movie.release_date)}</span></h4>
+                  <p>Overview: {movie.overview || movie.tagline}</p>
+                  <p>Lang: {movie.original_language}</p>
+                  <div onClick={handleClickIcons}>
+                    <FaTrash
+                      className="icon delete-icon"
+                    />
+                    <FaEdit
+                      className="icon edit-icon"
+                    />
 
+                  </div>
                 </div>
               </div>
               <div className="col-md-6">
@@ -87,17 +97,21 @@ function Movie() {
               </div>
             </div>
           </main> </>
-
       }
-      {showForm && (
-        <div className="modal" tabIndex="-1" role="dialog" style={{ display: "block" }}>
-          <div className="modal-dialog" role="document">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title">edit movie</h5>
-                <button type="button" className="btn-close" onClick={handleCloseModal}></button>
-              </div>
+      {
+        showDel && <DeleteMovie setShowDel={setShowDel} id={id} />
+      }
+      {showForm && (<div className="modal" tabIndex="-1" role="dialog" style={{ display: "block" }}>
+        <div className="modal-dialog" role="document">
+          <div className="modal-content">
+            {!showDel ? <><div className="modal-header"><h5 className="modal-title">edit movie</h5>
+              <button type="button" className="btn-close" onClick={handleCloseModal}></button>
+            </div>
               <div className="modal-body">
+                <FaTrash
+                  className="icon delete-icon"
+                  onClick={handleClickTrash}
+                />
                 <form onSubmit={handleSubmit}>
                   <div className="mb-3">
                     <label
@@ -126,7 +140,7 @@ function Movie() {
                       id="title"
                       className="form-control"
                       onChange={handleMovieInput}
-                      value={entry.title}
+                      value={entry.title ?? ''}
                     />
                   </div>
 
@@ -166,7 +180,7 @@ function Movie() {
                       className="form-control"
                       rows="3"
                       onChange={handleMovieInput}
-                      value={entry.overview}
+                      value={entry.overview ?? ''}
                     />
                   </div>
 
@@ -180,7 +194,7 @@ function Movie() {
                       id="tagline"
                       className="form-control"
                       onChange={handleMovieInput}
-                      value={entry.tagline}
+                      value={entry.tagline ?? ''}
                     />
                   </div>
 
@@ -224,7 +238,7 @@ function Movie() {
                       id="vote_average"
                       className="form-control"
                       onChange={handleMovieInput}
-                      value={entry.vote_average}
+                      value={entry.vote_average ?? 3}
                     />
                   </div>
                   <div className="mb-3">
@@ -278,13 +292,17 @@ function Movie() {
                   Close
                 </button>
               </div>
-            </div>
+            </>
+              :
+              <DeleteMovie setShowDel={setShowDel} setShowForm={setShowForm} id={id} />
+            }
           </div>
         </div>
+      </div>
       )}
       {showForm && <div className="modal-backdrop fade show" onClick={handleCloseModal}></div>}
-    </Overlay>
-  </div>;
+    </div>
+  </Overlay>;
 }
 
 export default Movie;

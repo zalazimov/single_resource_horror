@@ -2,15 +2,16 @@ import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import EditMovie from "./components/EditMovie/EditMovie";
 import Nav from "./components/Nav/Nav";
+import CreateMovie from "./components/CreateMovie/CreateMovie";
 import { MovieContext } from "./components/Context/context";
 import Spinner from "./common/Spinner";
 import { posterImage, formatDate } from "./components/helper";
-import CreateMovie from "./components/CreateMovie/CreateMovie";
 import "./App.css";
 
 function App() {
   const Home = React.lazy(() => import("./components/Movies/Movies"));
   const Movie = React.lazy(() => import("./components/Movie/Movie"));
+  const Index = React.lazy(() => import("./components/DBIndex/Index"));
   const SearchRes = React.lazy(() =>
     import("./components/SearchRes/SearchRes")
   );
@@ -45,6 +46,7 @@ function App() {
               <Route path="/movies/:id" element={<Movie />} />
               <Route path="/search" element={<SearchRes />} />
               <Route path="/create" element={<CreateMovie />} />
+              <Route path="/index" element={<Index />} />
               <Route path="/:id" element={<EditMovie />} />
               <Route path="/404" element={<h1>404 Error Not Found</h1>} />
               <Route path="*" element={<h1>404 Error Not Found</h1>} />

@@ -17,14 +17,13 @@ function CreateMovie() {
     let selectedValues = Array.from(event.target.selectedOptions, option => option.value);
     if (!selectedValues.length) selectedValues = ['Horror']
     setSelectedOptions(selectedValues);
-    setEntry({...entry, ['genre_names']: selectedValues.join(', ')})
+    setEntry({ ...entry, ['genre_names']: selectedValues.join(', ') })
   };
 
   async function handleSubmit(e) {
     e.preventDefault();
     console.log(entry);
     try {
-
       if (!validateForm.every(item => entry[item] !== '' || entry[item] !== null)) {
         alert(
           "Please enter some information for either the overview or the tagline!"
@@ -45,7 +44,7 @@ function CreateMovie() {
   }
 
   return (
-    <div className="container mt-5 mb-5">
+    <div className="container mt-5 bg-light">
       <h3 className="text-center mb-4">New Movie</h3>
       <div className="row justify-content-center">
         <div className="col-lg-6 col-md-8">
@@ -214,12 +213,11 @@ function CreateMovie() {
                 id="genre_names"
               >
                 {genreNames.map((option, i) => (
-                  <option key={`${option.substring(0,2)}${i}`} value={option}>{option}</option>
+                  <option key={`${option.substring(0, 2)}${i}`} value={option}>{option}</option>
                 ))}
               </select>
             </div>
-
-            <div className="d-grid gap-2 mt-4 col-6">
+            <div className="d-grid gap-2 mt-4 mb-4 col-6">
               <button className="btn btn-primary" type="submit">
                 Submit
               </button>
