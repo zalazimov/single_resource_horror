@@ -9,8 +9,7 @@ function SearchRes() {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const query = searchParams.get("query");
-  const { results, setResults, setIsLoading, isLoading, posterImage } =
-    useContext(MovieContext);
+  const { results, setResults, setIsLoading, isLoading, posterImage } = useContext(MovieContext);
   const navigate = useNavigate();
 
   useEffect(() => {

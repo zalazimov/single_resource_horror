@@ -1,6 +1,7 @@
 import axios from "axios";
 const API = process.env.REACT_APP_API_URL2;
 const API2 = process.env.REACT_APP_API_URL;
+const API3 = process.env.REACT_APP_API_URL3;
 
 export async function fetchMoviesData() {
   try {
@@ -42,6 +43,15 @@ export async function fetchMovieByTitle(title) {
     const result = await axios.get(`${API2}/movies`, {
       params: { title: title },
     });
+    return result;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+export async function fetchPopularMovies() {
+  try {
+    const result = await axios.get(API3);
     return result;
   } catch (e) {
     console.log(e);
