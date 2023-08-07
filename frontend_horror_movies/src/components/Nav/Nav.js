@@ -1,35 +1,33 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { reel } from "../../assets";
+import { terrorlogo } from "../../assets";
 import Searchbar from "../Searchbar/Searchbar";
 
 function Nav() {
   return (
-    <nav className="navbar navbar-expand-sm navbar-light bg-light fixed-top">
-      <Link className="navbar-brand" to="/">
+    <nav className="navbar navbar-expand-sm navbar-light bg-light fixed-top bg-dark">
+      <Link className="navbar-brand text-warning" to="/movies">
         <img
-          src={reel}
+          src={terrorlogo}
           alt="Logo"
-          width="30"
-          height="30"
-          className="d-inline-block align-top"
+          width="280"
+          className="d-inline-block align-top px-4"
         />
-        FormidulosusDB
       </Link>
       <div className="collapse navbar-collapse d-flex flex-wrap" id="navbarNav">
         <ul className="navbar-nav ml-auto">
           <li className="nav-item px-5">
-            <Link className="nav-link" to="/movies">
+            <Link className="nav-link text-warning" to="/">
               Home
             </Link>
           </li>
           <li className="nav-item px-5">
-            <Link className="nav-link" to="/index">
+            <Link className="nav-link text-warning" to="/index">
               Index
             </Link>
           </li>
           <li className="nav-item px-5">
-            <Link className="nav-link" to="/create">
+            <Link className="nav-link text-warning" to="/create">
               Add Movie
             </Link>
           </li>

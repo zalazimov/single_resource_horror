@@ -23,40 +23,51 @@ function SearchRes() {
       .catch((e) => navigate("/movies"));
   }, [query]);
 
-  return (<Overlay isLoading={isLoading}>
-        <div className="container my-4">
-          <section className="row text-center">
-            {results &&
-              results
-                .slice(0, results.length > 30 ? 30 : results.length)
-                .map((movie) => {
-                  return (
-                    <div
-                      key={movie.id}
-                      className="col-lg-3 col-md-4 col-sm-6 mb-4"
+  return (
+    <Overlay isLoading={isLoading}>
+      <div className="container my-4">
+        <section className="row text-center mt-5">
+          <header>
+            {results && (
+              <div className="py-3 text-warning fs-4">{`Search results for: "${query}"`}</div>
+            )}
+          </header>
+
+          {results &&
+            results
+              .slice(0, results.length > 30 ? 30 : results.length)
+              .map((movie) => {
+                return (
+                  <div
+                    key={movie.id}
+                    className="col-lg-3 col-md-4 col-sm-6 my-4"
+                  >
+                    <Link
+                      className="link-underline link-underline-opacity-0 text-warning"
+                      to={`/movies/${movie.id}`}
                     >
-                      <Link
-                        className="link-underline link-underline-opacity-0 text-dark"
-                        to={`/movies/${movie.id}`}
-                      >
-                        <img
-                          src={posterImage(movie)}
-                          alt={movie.original_title}
-                          height="250px"
-                          width="180px"
-                          className="rounded-1"
-                        ></img>
-                        <p className="mt-1 fs-6">
-                          {movie.original_title} (
-                          {movie.release_date.slice(0, 4)})
-                        </p>
-                      </Link>
-                    </div>
-                  );
-                })}
-          </section>
-        </div>
-      </Overlay>
+                      <img
+                        src={
+                          movie.poster_path
+                            ? `https://image.tmdb.org/t/p/w1280${movie.poster_path}`
+                            : posterImage()
+                        }
+                        alt={movie.original_title}
+                        height="250px"
+                        width="180px"
+                        className="rounded-1"
+                      ></img>
+                      <p className="mt-1 fs-6">
+                        {movie.original_title} ({movie.release_date.slice(0, 4)}
+                        )
+                      </p>
+                    </Link>
+                  </div>
+                );
+              })}
+        </section>
+      </div>
+    </Overlay>
   );
 }
 

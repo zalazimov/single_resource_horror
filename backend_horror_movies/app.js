@@ -16,7 +16,7 @@ app.use("/collections", collController);
 app.use("/home", homeController);
 
 app.get("/", (req, res) => {
-  res.send("Welcome to FormidulosusDB");
+  res.send("Welcome to TerrorFlick");
 });
 app.get("/notfound", (req, res) => {
   res.status(404).send("invalid request");
