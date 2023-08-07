@@ -8,7 +8,7 @@ import Overlay from "../../common/Overlay";
 
 function Movies() {
   const navigate = useNavigate();
-  const [movies, setMovies] = useState(null)
+  const [movies, setMovies] = useState(null);
 
   const { isLoading, setIsLoading } = useContext(MovieContext);
 
@@ -17,7 +17,7 @@ function Movies() {
     fetchMoviesData()
       .then((res) => {
         let arr = [];
-        while (arr.length < 12) {
+        while (arr.length < 18) {
           let n = Math.floor(Math.random() * res.data.length);
           if (!arr.includes(n)) arr.push(n);
         }
@@ -27,36 +27,40 @@ function Movies() {
       .catch((e) => navigate("/404"));
   }, []);
 
-  return (<Overlay isLoading={isLoading}>
-        <div className="container py-4">
-          <>{ movies && <MainImage images={movies} />}</>
-          <section className="row text-center">
-            {movies &&
-              movies.map((movie) => {
-                return (
-                  <div
-                    key={movie.id}
-                    className="col-lg-3 col-md-4 col-sm-6 mb-4"
+  return (
+    <Overlay isLoading={isLoading}>
+      <div className="container py-4">
+        <>{movies && <MainImage images={movies} />}</>
+        <section className="row text-center">
+          {movies &&
+            movies.map((movie) => {
+              return (
+                <div
+                  key={movie.id}
+                  className="col-lg-2 col-md-4 col-sm-6 col-12 mb-4"
+                >
+                  <Link
+                    className="link-underline link-underline-opacity-0 text-warning"
+                    to={`/movies/${movie.id}`}
                   >
-                    <Link to={`/movies/${movie.id}`}>
-                      <img
-                        src={`https://image.tmdb.org/t/p/w1280${movie.poster_path}`}
-                        alt={movie.original_title}
-                        height="250px"
-                        width="180px"
-                        className="rounded-1"
-                      ></img>
-                      <p className="mt-1 fs-6">
-                        {movie.original_title} ({movie.release_date.slice(0, 4)}
-                        )
-                      </p>
-                    </Link>
-                  </div>
-                );
-              })}
-          </section>
-        </div>
-      </Overlay>);
+                    <img
+                      src={`https://image.tmdb.org/t/p/w1280${movie.poster_path}`}
+                      alt={movie.original_title}
+                      height="250px"
+                      width="180px"
+                      className="rounded-1 "
+                    ></img>
+                    <p className="mt-1 fs-6">
+                      {movie.original_title} ({movie.release_date.slice(0, 4)})
+                    </p>
+                  </Link>
+                </div>
+              );
+            })}
+        </section>
+      </div>
+    </Overlay>
+  );
 }
 
 export default Movies;

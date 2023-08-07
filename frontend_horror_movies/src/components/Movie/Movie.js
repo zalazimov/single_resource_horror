@@ -90,7 +90,7 @@ function Movie() {
 
   return (
     <Overlay isLoading={isLoading}>
-      <div className="container my-4">
+      <div className="container mt-4">
         {movie && (
           <>
             {" "}
@@ -98,47 +98,78 @@ function Movie() {
             <main className="container">
               <div className="row">
                 <div className="col-md-6 py-2 px-5">
-                  <div className="bg-secondary p-3 rounded-2">
-                    {movie.revenue ? <h2>Revenue: {movie.revenue}</h2> : " "}
-                    {movie.popularity ? (
-                      <h2>Popularity: {movie.popularity}</h2>
-                    ) : (
-                      " "
+                  <div className="">
+                    {movie.title && (
+                      <h2 className="text-warning">{movie.title}</h2>
                     )}
-                    <h4>
-                      running time{" "}
-                      <span className="badge bg-info">
-                        {movie.runtime > 0 ? movie.runtime : "64"}m
+                    <p className="text-warning">{movie.genre_names}</p>
+                  </div>
+
+                  <h5 className="text-warning">
+                    <span className="fw-bolder">Release Date</span>:{" "}
+                    {formatDate(movie.release_date)}
+                  </h5>
+                  <h5 className="text-warning">
+                    <span className="fw-bolder">Runtime</span>:{" "}
+                    {movie.runtime > 0 ? movie.runtime : "64"} minutes
+                  </h5>
+                  {movie.revenue ? (
+                    <h6 className="text-warning">
+                      <span className="fw-bolder">Revenue</span>:{" "}
+                      {movie.revenue}
+                    </h6>
+                  ) : (
+                    " "
+                  )}
+                  {movie.popularity ? (
+                    <h6 className="text-warning">
+                      <span className="fw-bolder">
+                        Popularity Rating (out of 10)
                       </span>
-                    </h4>
-                    <h4>
-                      release date{" "}
-                      <span className="badge bg-info">
-                        {formatDate(movie.release_date)}
-                      </span>
-                    </h4>
-                    <p>Overview: {movie.overview || movie.tagline}</p>
-                    <p>Lang: {movie.original_language}</p>
-                    <div onClick={handleClickIcons}>
-                      <FaTrash className="icon delete-icon" />
-                      <FaEdit className="icon edit-icon" />
-                    </div>
+                      : {movie.popularity}
+                    </h6>
+                  ) : (
+                    " "
+                  )}
+                  <p className="text-warning">
+                    <span className="fw-bolder">Overview</span>:{" "}
+                    {movie.overview || movie.tagline}
+                  </p>
+                  <p className="text-warning">
+                    Language:{" "}
+                    {movie.original_language === "en"
+                      ? "English"
+                      : movie.original_language === "fr"
+                      ? "French"
+                      : movie.original_language === "ja"
+                      ? "Japanese"
+                      : movie.original_language === "it"
+                      ? "Italian"
+                      : movie.original_language === "es"
+                      ? "Spanish"
+                      : movie.original_language}
+                  </p>
+                  <div onClick={handleClickIcons}>
+                    <FaTrash className="icon delete-icon text-danger" />
+                    <FaEdit className="icon edit-icon text-primary" />
                   </div>
                 </div>
-                <div className="col-md-6">
-                  <img
-                    src={
-                      movie.poster_path
-                        ? `https://image.tmdb.org/t/p/w1280${movie.poster_path}`
-                        : stockposter
-                    }
-                    alt={movie.original_title}
-                    className="img-fluid rounded-1"
-                    style={{ maxWidth: "300px" }}
-                  />
-                  <div className="mt-3">
-                    <h2>{movie.original_title}</h2>
-                    <p>{movie.genre_names}</p>
+                <div className="col-md-6 mx-auto">
+                  <div className="container">
+                    <div className="text-center">
+                      <img
+                        src={
+                          movie.poster_path
+                            ? `https://image.tmdb.org/t/p/w1280${movie.poster_path}`
+                            : stockposter
+                        }
+                        alt={movie.original_title}
+                        className="img-fluid rounded-1 text-align-center"
+                        style={{ maxWidth: "300px" }}
+                      />
+
+                      <div className="mt-1">Original Movie Poster</div>
+                    </div>
                   </div>
                 </div>
               </div>
