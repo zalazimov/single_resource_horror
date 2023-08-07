@@ -1,37 +1,49 @@
 import { stockposter, stockposterII } from "../assets";
 
-export function posterImage(args, flag) {
-  function getRandomElementFromArray(array) {
-    if (array.length === 0) {
-      return null;
+export function posterImage() {
+    function getRandomElementFromArray(array) {
+        if (array.length === 0) {
+            return null;
+        }
+
+        const randomIndex = Math.floor(Math.random() * array.length);
+        return array[randomIndex];
     }
-
-    const randomIndex = Math.floor(Math.random() * array.length);
-    return array[randomIndex];
-  }
-
-  if (args.poster_path)
-    return `https://image.tmdb.org/t/p/w1280${args.poster_path}`;
-  else if (!args.poster_path)
-    return getRandomElementFromArray([stockposter, stockposterII]);
+        return getRandomElementFromArray([stockposter, stockposterII]);
 }
 
 export function formatDate(args) {
-  const date = new Date(args);
-  const options = { year: "numeric", month: "long", day: "numeric" };
-  const formattedDate = date.toLocaleDateString("en-US", options);
+    const date = new Date(args);
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    const formattedDate = date.toLocaleDateString("en-US", options);
 
-  return formattedDate;
+    return formattedDate;
 }
 
-export function selectLan() {
-  return [
+export function generateDates() {
+    const today = new Date();
+    const dates = [];
+
+    for (let i = 0; i < 90; i++) {
+        const date = new Date(today);
+        date.setDate(date.getDate() - i);
+        const formattedDate = date.toISOString().slice(0, 10);
+        dates.push(formattedDate);
+    }
+
+    return dates;
+}
+
+export const selectLan = [
     "en",
+    "fr",
+    "ja",
+    "it",
+    "sp",
     "nb",
     "ko",
     "ml",
     "lg",
-    "it",
     "ss",
     "ps",
     "da",
@@ -43,7 +55,6 @@ export function selectLan() {
     "gl",
     "bs",
     "mk",
-    "fr",
     "pa",
     "sk",
     "si",
@@ -59,12 +70,10 @@ export function selectLan() {
     "hr",
     "xx",
     "cs",
-    "ja",
     "lt",
     "cn",
     "cr",
     "lo",
-    "sp",
     "su",
     "az",
     "eu",
@@ -122,25 +131,16 @@ export function selectLan() {
     "tl",
     "sl",
     "kl",
-    "no",
-  ];
-}
+    "no"
+];
 
-export function inputFields() {
-    //vote_average budget runtime
-    return ['original_title', 'title', 'overview', 'tagline', 'poster_path', 1, 2, 3, 'genre_names']
-}
 
-export function generateDates() {
-    const today = new Date();
-    const dates = [];
+export const genreNames = ["Horror", "Family", "Science Fiction", "Music", "Comedy", "Western", "Crime", "War", "Romance", "Drama",
+    "Mystery", "Fantasy", "Adventure", "Documentary", "Action", "Animation", "Thriller", "History", "TV Movie"];
 
-    for (let i = 0; i < 90; i++) {
-        const date = new Date(today);
-        date.setDate(date.getDate() - i);
-        const formattedDate = date.toISOString().slice(0, 10);
-        dates.push(formattedDate);
-    }
-
-    return dates;
-}
+export const validateForm = ["original_title",
+    "original_language",
+    "overview",
+    "runtime",
+    "release_date",
+    "genre_names"];

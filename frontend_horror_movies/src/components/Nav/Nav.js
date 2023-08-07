@@ -5,7 +5,7 @@ import Searchbar from "../Searchbar/Searchbar";
 
 function Nav() {
   return (
-    <nav className="navbar navbar-expand-sm navbar-light bg-light">
+    <nav className="navbar navbar-expand-sm navbar-light bg-light fixed-top">
       <Link className="navbar-brand" to="/">
         <img
           src={reel}

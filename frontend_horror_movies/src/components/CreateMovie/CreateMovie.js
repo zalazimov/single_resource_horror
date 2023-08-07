@@ -1,45 +1,31 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
-import { selectLan } from "../helper";
+import { selectLan, validateForm, genreNames, generateDates, } from "../helper";
 import { newEntry } from "../api";
 
 function CreateMovie() {
   let navigate = useNavigate();
-  const lang = selectLan();
+  const dates = generateDates();
+  const [selectedOptions, setSelectedOptions] = useState(['Horror']);
   const [entry, setEntry] = useState({
-    original_title: "",
-    title: "",
-    original_language: "en",
-    overview: "",
-    tagline: "",
-    release_date: "",
-    vote_average: "",
-    vote_count: 1,
-    runtime: "",
-    genre_names: "",
+    'original_title': '', 'title': '', 'overview': '', 'vote_count': 1, 'tagline': '', 'poster_path': '', 'vote_average': 3.0,
+    'budget': 0, 'runtime': 64, 'genre_names': 'Horror',
+    'release_date': new Date(), 'status': 'Released', 'original_language': 'en', 'revenue': 0
   });
 
-  function generateDates() {
-    const today = new Date();
-    const dates = [];
-
-    for (let i = 0; i < 1000; i++) {
-      const date = new Date(today);
-      date.setDate(date.getDate() - i);
-      const formattedDate = date.toISOString().slice(0, 10);
-      dates.push(formattedDate);
-    }
-
-    return dates;
-  }
-
-  const dates = generateDates();
+  const handleSelectChange = (event) => {
+    let selectedValues = Array.from(event.target.selectedOptions, option => option.value);
+    if (!selectedValues.length) selectedValues = ['Horror']
+    setSelectedOptions(selectedValues);
+    setEntry({...entry, ['genre_names']: selectedValues.join(', ')})
+  };
 
   async function handleSubmit(e) {
     e.preventDefault();
     console.log(entry);
     try {
-      if (entry.overview === "" || entry.tagline === "") {
+
+      if (!validateForm.every(item => entry[item] !== '' || entry[item] !== null)) {
         alert(
           "Please enter some information for either the overview or the tagline!"
         );
@@ -107,12 +93,12 @@ function CreateMovie() {
                 className="form-control"
                 id="original_language"
                 name="original_language"
-                value={entry["original_language"]}
+                value={entry.original_language}
                 onChange={(e) => setEntry(e.target.value)}
               >
-                {lang.map((item, i) => {
+                {selectLan.map((item, i) => {
                   return (
-                    <option value="item" key={i}>
+                    <option value={item} key={i}>
                       {item}
                     </option>
                   );
@@ -165,10 +151,9 @@ function CreateMovie() {
                 value={entry.release_date}
                 onChange={handleMovieInput}
               >
-                {dates.map((option) => (
-                  <option key={option} value={option}>
+                {dates.map((option, i) => (
+                  <option key={i} value={option}>
                     {option}
-                    {/* {JSON.stringify(option).slice(1, 11)} */}
                   </option>
                 ))}
               </select>
@@ -203,6 +188,7 @@ function CreateMovie() {
                 required
                 placeholder="Enter number, like 120"
                 type="number"
+                step="1"
                 min="1"
                 max="999"
                 name="runtime"
@@ -213,23 +199,24 @@ function CreateMovie() {
               />
             </div>
 
-            <div className="mb3">
+            <div className="mb-3">
               <label
                 className="fs-5 fw-medium form-label"
                 htmlFor="genre_names"
               >
                 Genre
               </label>
-              <input
-                required
-                placeholder="Add more than one subgenre if you know them..."
-                type="text"
-                name="genre_names"
-                id="genre_names"
+              <select
+                multiple
+                value={selectedOptions}
+                onChange={handleSelectChange}
                 className="form-control"
-                onChange={handleMovieInput}
-                value={entry.genre_names}
-              />
+                id="genre_names"
+              >
+                {genreNames.map((option, i) => (
+                  <option key={`${option.substring(0,2)}${i}`} value={option}>{option}</option>
+                ))}
+              </select>
             </div>
 
             <div className="d-grid gap-2 mt-4 col-6">

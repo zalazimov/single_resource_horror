@@ -7,9 +7,8 @@ import './Main.css'
 const MainImage = ({ images }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const currentImage = images[currentImageIndex];
-  let imagesource = ''
-  if (currentImage.backdrop_path) imagesource = `https://image.tmdb.org/t/p/w1066_and_h600_bestv2${currentImage.backdrop_path}`
-  else if (!currentImage.backdrop_path) imagesource = stockbanner;
+  let imagesource = stockbanner
+  if (currentImage.backdrop_path) imagesource = `https://image.tmdb.org/t/p/w1066_and_h600_bestv2${currentImage.backdrop_path}`;
 
   const handlePrevClick = () => {
     setCurrentImageIndex((prevIndex) => (prevIndex === 0 ? images.length - 1 : prevIndex - 1));
@@ -20,7 +19,7 @@ const MainImage = ({ images }) => {
   };
 
   return (
-    <div className="main-image-container">
+    <div className="main-image-container py-4">
       <img className="main-image" src={imagesource} alt={currentImage.original_title} />
       <Link to={`/movies/${currentImage.id}`}>
       <div className="overlay">{currentImage.original_title}</div>

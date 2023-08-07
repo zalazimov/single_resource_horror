@@ -50,3 +50,12 @@ export async function newEntry(entry) {
     console.log(e);
   }
 }
+
+export async function editMovieInDB(body, id) {
+  try {
+    const result = await axios.put(`${API2}/movies/${id}`, body);
+    return result;
+  } catch (e) {
+    console.log(e);
+  }
+}
