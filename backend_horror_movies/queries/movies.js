@@ -1,5 +1,12 @@
 const db = require("../db/dbConfig");
 
+function replaceSpecialChars(inputString) {
+    // Replace single quotes, double quotes, and triple quotes with two single quotes
+    const replacedString = inputString.replace(/'|"|"""|,/g, '');
+
+    return replacedString;
+}
+
 //get all movies
 async function getMovies() {
     const someMovie = await db
@@ -154,7 +161,8 @@ async function addRow(args) {
         )}) 
         VALUES (${Object.values(args)
                 .map((item) => {
-                    return `'${item}'`;
+                    if (typeof item == 'string') return `'${replaceSpecialChars(item)}'`
+                    else return `'${item}'`;
                 })
                 .join(",")}) RETURNING *`);
         return Row;
@@ -183,7 +191,7 @@ async function updateRow(args, id) {
         const Row = await db.any(
             `UPDATE horrmovies SET ${arr
                 .map((item, i) => {
-                    return `${item} = '${vals[i]}'`;
+                    return `${item} = '${typeof vals[i] == 'string' ? replaceSpecialChars(vals[i]) : vals[i]}'`;
                 })
                 .join(", ")} where
         id = $1 RETURNING *`,
