@@ -2,8 +2,8 @@ import React, { useState, useEffect, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Overlay from "../../common/Overlay";
 import MainImage from "../Movies/MainImage";
-import { avgpopularity } from "../helper";
-import { fetchMovieById } from "../api";
+import { avgpopularity, } from "../helper";
+import { fetchMovieById, fetchPopularMovies, } from "../api";
 import { MovieContext, FormContext } from "../Context/context";
 import { FaTrash, FaEdit, FaThumbsUp } from "react-icons/fa";
 import DeleteMovie from "../DeleteMovie/DeleteMovie";
@@ -33,23 +33,14 @@ function Movie() {
     setSelectedOptions,
     setShowDel,
     id,
-  };
+  }
 
   useEffect(() => {
-    setIsLoading(true);
-    fetchMovieById(id)
-      .then((res) => {
-        setMovie(res.data[0]);
-        setIsLoading(false);
-        setEntry(res.data[0]);
-        setPopul(() =>
-          avgpopularity(
-            res.data[0].original_title,
-            data || JSON.parse(localStorage.getItem("avgpopularity"))
-          )
-        );
-      })
-      .catch((e) => navigate("/404"));
+    setIsLoading(true)
+    if (!data && !localStorage.getItem('avgpopularity')) {
+      fetchPopularMovies().then(res => { localStorage.setItem('avgpopularity', JSON.stringify(res.data)) }).catch(e => console.log(e));
+    }
+    fetchMovieById(id).then(res => { setMovie(res.data[0]); setIsLoading(false); setEntry(res.data[0]); setPopul(() => avgpopularity(res.data[0].original_title, (data || JSON.parse(localStorage.getItem('avgpopularity'))))); }).catch(e => navigate('/404'));
   }, [id]);
 
   const handleCloseModal = () => {
