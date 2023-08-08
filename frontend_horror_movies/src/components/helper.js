@@ -46,6 +46,14 @@ export function compareObjects(obj1, obj2) {
     return true;
 }
 
+export function avgpopularity(title, data) {
+    let f = data.find(item => item.original_title === title);
+    if (f) {
+        return f;
+    }
+    return null
+}
+
 
 export const selectLan = [
     "en",

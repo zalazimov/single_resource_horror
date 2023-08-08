@@ -5,6 +5,7 @@ const morgan = require("morgan");
 const collController = require("./controller/collController");
 const movieController = require("./controller/movieController");
 const homeController = require("./controller/homeController");
+const popController = require("./controller/popController");
 
 const app = express();
 
@@ -14,7 +15,7 @@ app.use(morgan("dev"));
 app.use("/movies", movieController);
 app.use("/collections", collController);
 app.use("/home", homeController);
-
+app.use("/popularity", popController);
 app.get("/", (req, res) => {
   res.send("Welcome to TerrorFlick");
 });

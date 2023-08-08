@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import EditMovie from "./components/EditMovie/EditMovie";
 import Nav from "./components/Nav/Nav";
@@ -8,6 +8,7 @@ import { MovieContext } from "./components/Context/context";
 import Spinner from "./common/Spinner";
 import { posterImage, formatDate } from "./components/helper";
 import "./App.css";
+import { fetchPopularMovies } from "./components/api";
 
 function App() {
   const Movies = React.lazy(() => import("./components/Movies/Movies"));
@@ -18,6 +19,7 @@ function App() {
   const [movie, setMovieById] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [results, setResults] = useState(null);
+  const [data, setData] = useState(null);
 
   const movieContextValue = {
     movie,
@@ -28,7 +30,13 @@ function App() {
     setResults,
     posterImage,
     formatDate,
+    data,
   };
+
+  useEffect(() => {
+    fetchPopularMovies().then(res => {setData(res.data); localStorage.setItem('avgpopularity', JSON.stringify(res.data))}).catch(e => console.log(e))
+  }, [])
+
   return (
     <div className="App">
       <React.Suspense fallback={<Spinner />}>

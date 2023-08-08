@@ -9,16 +9,15 @@ function SearchRes() {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const query = searchParams.get("query");
-  const { results, setResults, setIsLoading, isLoading, posterImage } =
-    useContext(MovieContext);
+  const { results, setResults, setIsLoading, isLoading, posterImage } = useContext(MovieContext);
   const navigate = useNavigate();
 
   useEffect(() => {
     setIsLoading(true);
     fetchBySubstring(query)
       .then((res) => {
-        setIsLoading(false);
-        setResults(res.data);
+          setResults(res.data);
+          setIsLoading(false);
       })
       .catch((e) => navigate("/movies"));
   }, [query]);

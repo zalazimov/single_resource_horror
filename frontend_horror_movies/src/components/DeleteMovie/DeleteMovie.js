@@ -1,7 +1,7 @@
 import { deleteMovieById } from '../api';
 import { useNavigate } from 'react-router-dom';
 
-function DeleteMovie({ setShowDel, setShowForm, id, }) {
+function DeleteMovie({ setShowDel, setShowForm, id, title, }) {
     const navigate = useNavigate()
     const handleDelete = () => {
         deleteMovieById(id).then(res => navigate('/index')).catch(e => { console.log(e); })
@@ -15,7 +15,7 @@ function DeleteMovie({ setShowDel, setShowForm, id, }) {
         </button>
     </div>
         <div className="modal-body">
-            Are you sure you want to delete?
+            {`Are you sure you want to delete ${title}?`}
         </div>
         <div className="modal-footer">
             <button type="button" className="btn btn-secondary" onClick={() => { setShowDel(false); setShowForm(false) }}>Cancel</button>
