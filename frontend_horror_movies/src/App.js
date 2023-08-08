@@ -18,7 +18,6 @@ function App() {
 
   const [movie, setMovieById] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [results, setResults] = useState(null);
   const [data, setData] = useState(null);
 
   const movieContextValue = {
@@ -26,8 +25,6 @@ function App() {
     setMovieById,
     isLoading,
     setIsLoading,
-    results,
-    setResults,
     posterImage,
     formatDate,
     data,
