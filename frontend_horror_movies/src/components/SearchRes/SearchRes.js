@@ -16,8 +16,8 @@ function SearchRes() {
     setIsLoading(true);
     fetchBySubstring(query)
       .then((res) => {
-        setIsLoading(false);
-        setResults(res.data);
+          setResults(res.data);
+          setIsLoading(false);
       })
       .catch((e) => navigate("/movies"));
   }, [query]);

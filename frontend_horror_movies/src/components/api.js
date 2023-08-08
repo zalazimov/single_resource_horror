@@ -29,6 +29,7 @@ export async function fetchMovieById(id) {
     console.log(e);
   }
 }
+
 export async function deleteMovieById(id) {
   try {
     const result = await axios.delete(`${API2}/movies/${id}`);

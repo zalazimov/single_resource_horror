@@ -104,16 +104,16 @@ async function getPopularMovies() {
     const data = await db
         .any(
             `WITH MonthPopularity AS (
-        SELECT
-            EXTRACT(MONTH FROM release_date) AS month,
-            avg(popularity) AS avg_popularity
-        FROM horrmovies
-        WHERE popularity > 1.2
-        GROUP BY month
-    )
-    SELECT h.original_title, mp.month, mp.avg_popularity, popularity
-    FROM horrmovies h
-    JOIN MonthPopularity mp ON EXTRACT(MONTH FROM h.release_date) = mp.month AND h.popularity > mp.avg_popularity`
+                SELECT
+                    EXTRACT(MONTH FROM release_date) AS month,
+                    round(avg(popularity)::numeric, 2) AS avg_popularity
+                FROM horrmovies
+                WHERE popularity > 1.2
+                GROUP BY month
+            )
+            SELECT h.original_title, mp.month, mp.avg_popularity, popularity
+            FROM horrmovies h
+            JOIN MonthPopularity mp ON EXTRACT(MONTH FROM h.release_date) = mp.month AND h.popularity > mp.avg_popularity`
         )
         .then((res) => res)
         .catch((e) => {
