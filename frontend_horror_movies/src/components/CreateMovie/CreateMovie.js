@@ -64,7 +64,7 @@ function CreateMovie() {
   }
 
   return (
-    <div className="container mt-5 bg-light form-container">
+    <div className="container bg-light form-container">
       <h3 className="text-center mb-4">New Movie</h3>
       <div className="row justify-content-center">
         <div className="col-lg-6 col-md-8">

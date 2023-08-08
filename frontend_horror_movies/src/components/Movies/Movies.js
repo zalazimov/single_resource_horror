@@ -29,7 +29,7 @@ function Movies() {
 
   return (
     <Overlay isLoading={isLoading}>
-      <div className="container py-4">
+      <div className="container">
         <>{movies && <MainImage images={movies} />}</>
         <section className="row text-center">
           {movies &&

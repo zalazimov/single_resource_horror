@@ -24,7 +24,7 @@ const MainImage = ({ images }) => {
   };
 
   return (
-    <div className="main-image-container py-4">
+    <div className="main-image-container">
       <img
         className="main-image opacity-25"
         src={imagesource}
@@ -37,11 +37,11 @@ const MainImage = ({ images }) => {
         </div>
       </Link>
       <div className="overview d-none d-md-flex fs-4 mt-5 text-warning">
-        {currentImage.overview
-          ? currentImage.overview.length > 300
+        <div className="container">
+        {currentImage.overview && currentImage.overview.length > 300
             ? currentImage.overview.slice(0, 300) + "..."
-            : currentImage.overview
-          : currentImage.tagline}
+            : currentImage.overview || currentImage.tagline}
+        </div>
       </div>
       {images.length > 1 && (
         <div>
