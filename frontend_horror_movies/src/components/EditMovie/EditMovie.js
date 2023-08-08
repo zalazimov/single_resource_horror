@@ -118,7 +118,7 @@ function EditMovie() {
               id="original_language"
               name="original_language"
               value={entry.original_language}
-              onChange={(e) => setEntry(e.target.value)}
+              onChange={handleMovieInput}
             >
               {selectLan.map((item, i) => {
                 return (
