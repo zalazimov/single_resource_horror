@@ -19,12 +19,15 @@ function SearchRes() {
         setResults(res.data);
         setIsLoading(false);
       })
-      .catch((e) =>{ setResults(null); setIsLoading(false)});
+      .catch((e) => {
+        setResults(null);
+        setIsLoading(false);
+      });
   }, [query]);
 
   return (
     <Overlay isLoading={isLoading}>
-      <div className="container my-4">
+      <div className="container my-4 bg-dark vh-100">
         <section className="row text-center mt-5 results-section">
           <header>
             {results && (
