@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import Overlay from "../../common/Overlay";
 import MainImage from "../Movies/MainImage";
 import { avgpopularity, } from "../helper";
 import { fetchMovieById, } from "../api";
-import { MovieContext } from "../Context/context";
+import { MovieContext, FormContext } from "../Context/context";
 import { FaTrash, FaEdit, FaThumbsUp } from 'react-icons/fa';
 import DeleteMovie from "../DeleteMovie/DeleteMovie";
-import Overlay from "../../common/Overlay";
 import EditMovie from "../EditMovie/EditMovie";
 
 function Movie() {
@@ -21,9 +21,20 @@ function Movie() {
   const [popul, setPopul] = useState(null);
   const navigate = useNavigate()
 
+  const formContextValue = {
+    setMovie,
+    movie,
+    setShowForm,
+    setEntry,
+    entry,
+    selectedOptions,
+    setSelectedOptions,
+    setShowDel,
+  }
+
   useEffect(() => {
     setIsLoading(true)
-    fetchMovieById(id).then(res => { setMovie(res.data[0]); setIsLoading(false); setEntry(res.data[0]); setPopul(() => avgpopularity(res.data[0].original_title, (data || JSON.parse(localStorage.getItem('avgpopularity'))))) }).catch(e => navigate('/404'));
+    fetchMovieById(id).then(res => { setMovie(res.data[0]); setIsLoading(false); setEntry(res.data[0]); setPopul(() => avgpopularity(res.data[0].original_title, (data || JSON.parse(localStorage.getItem('avgpopularity'))))); }).catch(e => navigate('/404'));
   }, [id]);
 
   const handleCloseModal = () => {
@@ -41,8 +52,8 @@ function Movie() {
   };
 
   return (
-    <Overlay isLoading={isLoading}>
-      <div className="container mt-4">
+    <FormContext.Provider value={formContextValue}><Overlay isLoading={isLoading}>
+      <div className="container">
         {movie && (
           <>
             {" "}
@@ -74,7 +85,7 @@ function Movie() {
                   {movie.popularity ? (
                     <h6 className="text-warning">
                       <span className="fw-bolder">
-                        Popularity Rating (out of 10)
+                        Popularity Rating
                       </span>
                       : {movie.popularity}
                     </h6>
@@ -150,9 +161,8 @@ function Movie() {
           >
             <div className="modal-dialog" role="document">
               <div className="modal-content">
-                {!showDel ? <EditMovie setMovie={setMovie} movie={movie} setShowForm={setShowForm} setEntry={setEntry} entry={entry}
-                  selectedOptions={selectedOptions} setSelectedOptions={setSelectedOptions} />
-                  : <DeleteMovie setShowDel={setShowDel} setShowForm={setShowForm} id={id} title={movie.original_title} />
+                {!showDel ? <EditMovie />
+                  : <DeleteMovie title={movie.original_title} />
                 }
               </div>
             </div>
@@ -165,7 +175,7 @@ function Movie() {
           ></div>
         )}
       </div>
-    </Overlay>
+    </Overlay></FormContext.Provider>
   );
 }
 

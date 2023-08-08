@@ -1,7 +1,10 @@
+import { useContext } from 'react';
+import { FormContext } from '../Context/context';
 import { deleteMovieById } from '../api';
 import { useNavigate } from 'react-router-dom';
 
-function DeleteMovie({ setShowDel, setShowForm, id, title, }) {
+function DeleteMovie({ title, }) {
+    const { setShowDel, setShowForm, id, } = useContext(FormContext);
     const navigate = useNavigate()
     const handleDelete = () => {
         deleteMovieById(id).then(res => navigate('/index')).catch(e => { console.log(e); })

@@ -14,7 +14,7 @@ function App() {
   const Movies = React.lazy(() => import("./components/Movies/Movies"));
   const Movie = React.lazy(() => import("./components/Movie/Movie"));
   const Index = React.lazy(() => import("./components/DBIndex/Index"));
-  const SearchRes = React.lazy(() =>import("./components/SearchRes/SearchRes"));
+  const SearchRes = React.lazy(() => import("./components/SearchRes/SearchRes"));
 
   const [movie, setMovieById] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -34,7 +34,7 @@ function App() {
   };
 
   useEffect(() => {
-    fetchPopularMovies().then(res => {setData(res.data); localStorage.setItem('avgpopularity', JSON.stringify(res.data))}).catch(e => console.log(e))
+    fetchPopularMovies().then(res => { setData(res.data); localStorage.setItem('avgpopularity', JSON.stringify(res.data)) }).catch(e => console.log(e))
   }, [])
 
   return (

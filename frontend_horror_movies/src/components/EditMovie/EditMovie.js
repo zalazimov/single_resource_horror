@@ -1,8 +1,10 @@
+import { useContext } from "react";
 import { editMovieInDB } from "../api";
 import { validateForm, compareObjects, genreNames, selectLan, generateDates, } from "../helper";
+import { FormContext } from "../Context/context";
 
-function EditMovie({ setMovie, movie, setShowForm, setEntry, entry, selectedOptions, setSelectedOptions, }) {
-
+function EditMovie() {
+  const { setMovie, movie, setShowForm, setEntry, entry, selectedOptions, setSelectedOptions, } = useContext(FormContext)
   const dates = generateDates();
 
   const handleSelectChange = (event) => {
@@ -12,7 +14,7 @@ function EditMovie({ setMovie, movie, setShowForm, setEntry, entry, selectedOpti
     );
     if (!selectedValues.length) selectedValues = ["Horror"];
     setSelectedOptions(selectedValues);
-    setEntry({ ...entry, ["genre_names"]: selectedValues.join(", ") });
+    setEntry({ ...entry, genre_names: selectedValues.join(", ") });
   };
 
   const handleCloseModal = () => {
