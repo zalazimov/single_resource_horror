@@ -1,70 +1,45 @@
-# Getting Started with Create React App
+# <span style="display:flex; align-items:center;">Single Resource Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<p>
+<h1>Group Members</h1>
+<ul>
 
-## Available Scripts
+<li><a href="https://github.com/zalazimovr">Zalman Azimov</a></li>
+<li><a href="https://github.com/DaveP80">David Paquette</a></li>
 
-In the project directory, you can run:
+</ul>
+</p>
 
-### `npm start`
+# About:::
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+<p>
+This group project has been an exciting journey of teamwork and synergy, yet pushed us to further our knowledge boundaries and improve our skills. We embarked on this project by establishing effective communication channels and task management systems. To maximize our efficiency, we utilized a Trello board to track our progress and coordinated our efforts through GitHub commits.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+And after a lot of work, we proudly present TerrorFlick: a React application designed to utilize our horror movie database for in-depth movie searches. Our aim is to provide users with an immersive experience, allowing them to search for their favorite horror films, and perhaps discover some new favorites as well!
 
-### `npm test`
+</p>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Instructions
 
-### `npm run build`
+<ol>
+<li>
+ Navigate to the search bar: On the TerrorFlick homepage, you will find a search bar located at the top of the page.
+</li>
+<li>Enter your search query: Type the title, id, or title substring of the movie you are looking to find into the search bar. For example, you can search for "Dracula"</li>
+<li>Click on the search button: Next to the search bar, there is a search button. Click on it or press Enter on your keyboard to initiate the search.</li>
+<li>Browse the search results: TerrorFlick will display a list of movies related to your search query. Each movie item will have a thumbnail image, title and release year.</li>
+<li>Click on movie: When you find a movie that interests you, click on its thumbnail or title. This will take you to the movie's dedicated page.</li>
+<li>Show page: On the movie page, you will find more information about that movie, including a description, original language, release year, sub-genres, popularity rating (out of 10) as well as an option to edit that movie information, as well as to delete it.</li>
+<li>Clicking on the trash icon will give you a prompt to delete that movie from the database</li>
+<li>Clicking on the edit icon (pen and notepad) will provide you with a form to edit information for that movie, that will then update the database accordingly</li>
+<li>At the top of the screen, you can find an 'Add Movie' option that, when clicked, will bring you to a form page to add information for a new movie</li>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+</ol>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<a href="https://trello.com/b/kiETFjFJ/horror-movie-db">Trello</a>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<a href="https://github.com/zalazimov/single_resource_horror">GitHub Repository</a>
 
-### `npm run eject`
+<!--Backend <a href="https://-----.netlify.app/">Netlify</a> -->
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<!--Frontend <a href="https://-----.netlify.app/">Netlify</a> -->

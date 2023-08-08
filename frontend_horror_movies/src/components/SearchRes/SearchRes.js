@@ -9,32 +9,33 @@ function SearchRes() {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const query = searchParams.get("query");
-  const { results, setResults, setIsLoading, isLoading, posterImage } = useContext(MovieContext);
+  const { results, setResults, setIsLoading, isLoading, posterImage } =
+    useContext(MovieContext);
   const navigate = useNavigate();
 
   useEffect(() => {
     setIsLoading(true);
     fetchBySubstring(query)
       .then((res) => {
-          setResults(res.data);
-          setIsLoading(false);
+        setResults(res.data);
+        setIsLoading(false);
       })
-      .catch((e) => navigate("/movies"));
+      .catch((e) => setIsLoading(false));
   }, [query]);
 
   return (
     <Overlay isLoading={isLoading}>
       <div className="container my-4">
-        <section className="row text-center mt-5">
+        <section className="row text-center mt-5 results-section">
           <header>
             {results && (
               <div className="py-3 text-warning fs-4">{`Search results for: "${query}"`}</div>
             )}
           </header>
 
-          {results &&
+          {results ? (
             results
-              .slice(0, results.length > 30 ? 30 : results.length)
+              .slice(0, results.length > 32 ? 32 : results.length)
               .map((movie) => {
                 return (
                   <div
@@ -63,7 +64,16 @@ function SearchRes() {
                     </Link>
                   </div>
                 );
-              })}
+              })
+          ) : (
+            <div className="container text-center mt-5">
+              <div className="py-3 text-warning fs-4">
+                {`Search results for: "${query}"`}
+                <h2>Sorry no results</h2>
+                <button onClick={() => window.history.back()}>back</button>
+              </div>
+            </div>
+          )}
         </section>
       </div>
     </Overlay>

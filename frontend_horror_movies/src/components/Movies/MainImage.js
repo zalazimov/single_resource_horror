@@ -26,9 +26,10 @@ const MainImage = ({ images }) => {
   return (
     <div className="main-image-container">
       <img
-        className="main-image opacity-25"
+        className="main-image opacity-25 img-fluid"
         src={imagesource}
         alt={currentImage.original_title}
+        style={{ maxHeight: "80vh" }}
       />
       <Link to={`/movies/${currentImage.id}`}>
         <div className="overlay text-warning fs-1 fw-bold mb-2">
@@ -38,7 +39,7 @@ const MainImage = ({ images }) => {
       </Link>
       <div className="overview d-none d-md-flex fs-4 mt-5 text-warning">
         <div className="container">
-        {currentImage.overview && currentImage.overview.length > 300
+          {currentImage.overview && currentImage.overview.length > 300
             ? currentImage.overview.slice(0, 300) + "..."
             : currentImage.overview || currentImage.tagline}
         </div>
