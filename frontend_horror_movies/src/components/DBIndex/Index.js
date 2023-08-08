@@ -46,14 +46,14 @@ function Index() {
                     <td>{item.original_language}</td>
                     <td>
                       {item.overview
-                        ? item.overview.slice(0, 25)
+                        ? item.overview.slice(0, 25) + "..."
                         : item.tagline.slice(0, 25)}
                     </td>
                     <td>{item.release_date.split("T")[0]}</td>
                     <td>{item.runtime.toString() + "m"}</td>
                     <td>{item.genre_names}</td>
                     <td>{item.vote_average}</td>
-                    <td>{item.budget}</td>
+                    <td>${item.budget}</td>
                   </tr>
                 ))}
               </tbody>
