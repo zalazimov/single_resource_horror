@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from "react";
 import { MovieContext } from "../Context/context";
 import { Link } from "react-router-dom";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { fetchBySubstring } from "../api";
 import Overlay from "../../common/Overlay";
 
@@ -9,9 +9,7 @@ function SearchRes() {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const query = searchParams.get("query");
-  const { results, setResults, setIsLoading, isLoading, posterImage } =
-    useContext(MovieContext);
-  const navigate = useNavigate();
+  const { results, setResults, setIsLoading, isLoading, posterImage } = useContext(MovieContext);
 
   useEffect(() => {
     setIsLoading(true);
