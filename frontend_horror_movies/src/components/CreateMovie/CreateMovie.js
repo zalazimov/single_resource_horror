@@ -38,7 +38,6 @@ function CreateMovie() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    console.log(entry);
     try {
       if (
         !validateForm.every(
@@ -113,7 +112,7 @@ function CreateMovie() {
                 id="original_language"
                 name="original_language"
                 value={entry.original_language}
-                onChange={(e) => setEntry(e.target.value)}
+                onChange={handleMovieInput}
               >
                 {selectLan.map((item, i) => {
                   return (
