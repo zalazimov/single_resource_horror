@@ -33,6 +33,8 @@ And after a lot of work, we proudly present TerrorFlick: a React application des
 <li>Clicking on the trash icon will give you a prompt to delete that movie from the database</li>
 <li>Clicking on the edit icon (pen and notepad) will provide you with a form to edit information for that movie, that will then update the database accordingly</li>
 <li>At the top of the screen, you can find an 'Add Movie' option that, when clicked, will bring you to a form page to add information for a new movie</li>
+<li>Creating a movie: After clicking on 'Add Movie' and filling out the relevant information in the form, clicking 'Submit' will now add your new movie to the database</li>
+<li>Please note that any new movies that are added will be given an id number that is +1 of the highest current id number available in the database.To see your new movie in the database, you can click on the 'Index' link at the top of your page and when being brought to the Movie Database Index page, make sure to invert the list by id by clicking on the bi-directional arrows a the top-left of the chart. This will show you the highest id number in the database, which will now include your newest movie entry</li>
 
 </ol>
 
