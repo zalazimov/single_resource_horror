@@ -165,13 +165,14 @@ async function getCollById(id) {
 
 //creating a new movie entry
 async function addRow(args) {
+    let keyarr = Object.keys(args)
     try {
-        const Row = await db.any(`INSERT INTO horrmovies (${Object.keys(args).join(
+        const Row = await db.any(`INSERT INTO horrmovies (${keyarr.join(
             ","
         )}) 
         VALUES (${Object.values(args)
-                .map((item) => {
-                    if (typeof item == 'string') return `'${replaceSpecialChars(item)}'`
+                .map((item, i) => {
+                    if (typeof item == 'string' && keyarr[i] !== 'genre_names') return `'${replaceSpecialChars(item)}'`
                     else return `'${item}'`;
                 })
                 .join(",")}) RETURNING *`);
