@@ -11,7 +11,7 @@ import EditMovie from "../EditMovie/EditMovie";
 import "./Movie.css";
 
 function Movie() {
-  const { isLoading, setIsLoading, posterImage, formatDate, data } =
+  const { isLoading, setIsLoading, posterImage, formatDate, data, } =
     useContext(MovieContext);
   const { id } = useParams();
   const stockposter = posterImage();
