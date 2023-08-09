@@ -18,7 +18,7 @@ function Movies() {
     fetchMoviesData()
       .then((res) => {
         let arr = [];
-        while (arr.length < 18) {
+        while (arr.length < 20) {
           let n = Math.floor(Math.random() * res.data.length);
           if (!arr.includes(n)) arr.push(n);
         }
