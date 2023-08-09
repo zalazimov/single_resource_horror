@@ -171,7 +171,9 @@ function Movie() {
                           style={{ width: '22vw', height: '29vw' }}
                         />
 
-                        <div className="mt-1">Original Movie Poster</div>
+                        <div className="mt-1 text-secondary">
+                          Original Movie Poster
+                        </div>
                       </div>
                     </div>
                   </div>

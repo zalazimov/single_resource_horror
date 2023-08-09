@@ -1,3 +1,7 @@
+body {
+  background-color: #495057;
+}
+
 .delete-icon:hover {
   transform: scale(1.4);
 }

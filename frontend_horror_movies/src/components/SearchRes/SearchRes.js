@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { fetchBySubstring } from "../api";
 import Overlay from "../../common/Overlay";
+import "./SearchRes.css";
 
 function SearchRes() {
   const location = useLocation();
@@ -27,7 +28,7 @@ function SearchRes() {
 
   return (
     <Overlay isLoading={isLoading}>
-      <div className="container my-4 bg-dark vh-100">
+      <div className="container my-4 min-vh-100">
         <section className="row text-center mt-5 results-section">
           <header>
             {results && (

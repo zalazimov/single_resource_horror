@@ -32,12 +32,12 @@ const MainImage = ({ images }) => {
         style={{ maxHeight: "80vh" }}
       />
       <Link to={`/movies/${currentImage.id}`}>
-        <div className="overlay text-warning fs-1 fw-bold mb-2">
+        <div className="overlay text-warning fs-1 fw-bold mb-5">
           {currentImage.original_title} ({currentImage.release_date.slice(0, 4)}
           )
         </div>
       </Link>
-      <div className="overview d-none d-md-flex fs-4 mt-5 text-warning">
+      <div className="overview d-none d-md-flex fs-5 mt-5 text-warning">
         <div className="container">
           {currentImage.overview && currentImage.overview.length > 300
             ? currentImage.overview.slice(0, 300) + "..."
