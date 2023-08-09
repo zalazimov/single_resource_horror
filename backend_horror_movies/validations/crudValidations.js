@@ -1,3 +1,8 @@
+function isValidCSV(input) {
+  const regex = /^(\s*[a-zA-Z\s-]+\s*,\s*)*[a-zA-Z\s-]+\s*$/;
+  return regex.test(input);
+}
+
 const checkTD = (req, res, next) => {
     if (!req.query.title ^ !req.query.date) {
       res.status(400).json({ error: "enter original title and release date" });
@@ -45,6 +50,11 @@ const checkTD = (req, res, next) => {
       }
     }
   };
+
+  const checkGenreNames = (req, res, next) => {
+    if (!isValidCSV(req.body.genre_names)) res.status(400).json({ err: "genre names must be csv" });
+    else next()
+  };
   
   const checkPut = (req, res, next) => {
     let arr = Object.keys(req.body);
@@ -86,5 +96,6 @@ const checkTD = (req, res, next) => {
     checkId,
     checkNum,
     checkPost,
+    checkGenreNames,
     checkPut,
   };

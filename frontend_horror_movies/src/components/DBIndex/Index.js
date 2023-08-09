@@ -1,21 +1,32 @@
 import React, { useState, useEffect, useContext } from "react";
 import Overlay from "../../common/Overlay";
 import { MovieContext } from "../Context/context";
-import { fetchIndexData } from "../api";
+import { fetchIndexData, fetchIndexDataDesc, } from "../api";
+import { updown } from "../../assets";
 
 function Index() {
   const { isLoading, setIsLoading } = useContext(MovieContext);
   const [movies, setMovies] = useState(null);
+  const [order, setOrder] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
-    fetchIndexData()
-      .then((res) => {
-        setIsLoading(false);
-        setMovies(res.data);
-      })
-      .catch((e) => console.log(e));
-  }, []);
+    if (order) {
+      fetchIndexDataDesc()
+        .then((res) => {
+          setIsLoading(false);
+          setMovies(res.data);
+        })
+        .catch((e) => console.log(e));
+    } else {
+      fetchIndexData()
+        .then((res) => {
+          setIsLoading(false);
+          setMovies(res.data);
+        })
+        .catch((e) => console.log(e));
+    }
+  }, [order]);
 
   return (
     <Overlay isLoading={isLoading}>
@@ -27,7 +38,7 @@ function Index() {
             <table className="table table-bordered">
               <thead>
                 <tr>
-                  <th>ID</th>
+                  <th>ID<img src={updown} style={{ width: '25px', height: '33px' }} alt='updown' onClick={() => setOrder(!order)} /></th>
                   <th>original title</th>
                   <th>original language</th>
                   <th>overview</th>
@@ -45,9 +56,9 @@ function Index() {
                     <td>{item.original_title}</td>
                     <td>{item.original_language}</td>
                     <td>
-                      {item.overview
-                        ? item.overview.slice(0, 25) + "..."
-                        : item.tagline.slice(0, 25)}
+                      {item.overview && item.overview.length > 25 ? item.overview.slice(0, 25) + "..." :
+                        item.overview ? item.overview :
+                          item.tagline.length > 25 ? item.tagline.slice(0, 25) + "..." : item.tagline}
                     </td>
                     <td>{item.release_date.split("T")[0]}</td>
                     <td>{item.runtime.toString() + "m"}</td>

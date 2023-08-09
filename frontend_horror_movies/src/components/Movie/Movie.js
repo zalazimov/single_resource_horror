@@ -168,7 +168,7 @@ function Movie() {
                           }
                           alt={movie.original_title}
                           className="img-fluid rounded-1 text-align-center"
-                          style={{ maxWidth: "300px" }}
+                          style={{ width: '22vw', height: '29vw' }}
                         />
 
                         <div className="mt-1 text-secondary">

@@ -6,6 +6,7 @@ const {
   getMoviesByTitle,
   getMoviesBySubstring,
   getMoviesLimit,
+  getMoviesLimDesc,
   getMoviesById,
   getMovieCard,
   addRow,
@@ -19,6 +20,7 @@ const {
   checkId,
   checkNum,
   checkPost,
+  checkGenreNames,
   checkPut,
 } = require("../validations/crudValidations");
 
@@ -52,11 +54,18 @@ router.get("/", async (req, res) => {
   else res.status(500).json({ err: "pg error" });
 });
 
+router.get("/limit/desc/:num", checkNum, async (req, res) => {
+  const movie = await getMoviesLimDesc(req.params.num);
+  if (movie[0]) res.json(movie);
+  else res.status(500).json({ err: "pg error" });
+});
+
 router.get("/limit/:num", checkNum, async (req, res) => {
   const movie = await getMoviesLimit(req.params.num);
   if (movie[0]) res.json(movie);
   else res.status(500).json({ err: "pg error" });
 });
+
 
 router.get("/:id", checkId, async (req, res) => {
   const movie = await getMoviesById(req.params.id);
@@ -70,7 +79,7 @@ router.get("/card/:id", checkId, async (req, res) => {
   else res.status(500).json({ err: "pg error" });
 });
 
-router.post("/", checkPost, async (req, res) => {
+router.post("/", checkPost, checkGenreNames, async (req, res) => {
   const newRow = await addRow(req.body);
   if (newRow[0]) res.status(201).json(newRow[0]);
   else res.status(500).json({ err: "pg error" });

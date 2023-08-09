@@ -38,7 +38,6 @@ export function compareObjects(obj1, obj2) {
         return false;
     }
     for (const key of keys1) {
-        if (key === 'genre_names') continue;
         if (obj1[key] !== obj2[key]) {
             return false;
         }
