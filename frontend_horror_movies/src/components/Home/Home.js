@@ -1,13 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { terrorlogo } from "../../assets";
+import "./Home.css";
 
 function Home() {
   return (
-    <div className="container-fluid bg-dark vh-100">
+    <div className="container-fluid min-vh-100">
       <div className="mt-5 text-center">
         <div className="py-5 text-center">
-          <img src={terrorlogo} alt="main logo" />
+          <img className="img-fluid" src={terrorlogo} alt="main logo" />
         </div>
         <div className="w-50 text-center mx-auto">
           <h4 className="text-warning">
