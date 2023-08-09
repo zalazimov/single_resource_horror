@@ -23,6 +23,9 @@ And after a lot of work, we proudly present TerrorFlick: a React application des
 
 <ol>
 <li>
+Upon reach the landing page, you will be presented with a brief intro of the app and what it does. You can either click on the 'here' link in the description or click on the 'TerrorFlick' logo at the top left of your screen to be brought to a featured movies page that has a list of randomly generated movies you can choose from. You can access this featured movies page at any point by clicking on the 'TerrorFlick' logo, regardless of what page you are currently on. Clicking on any movie on the featured movies page will send you to the show page for that movie
+</li>
+<li>
  Navigate to the search bar: On the TerrorFlick homepage, you will find a search bar located at the top of the page.
 </li>
 <li>Enter your search query: Type the title, id, or title substring of the movie you are looking to find into the search bar. For example, you can search for "Dracula"</li>
