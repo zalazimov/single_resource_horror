@@ -38,7 +38,7 @@ function Movies() {
               return (
                 <div
                   key={movie.id}
-                  className="col-lg-2 col-md-4 col-sm-6 col-12 mb-4"
+                  className="col-lg-3 col-md-4 col-sm-6 col-12 mb-4"
                 >
                   <Link
                     className="link-underline link-underline-opacity-0 text-warning"
