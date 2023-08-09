@@ -53,7 +53,6 @@ export function avgpopularity(title, data) {
     }
 }
 
-
 export const selectLan = [
     "en",
     "fr",
