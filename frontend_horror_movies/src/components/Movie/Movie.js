@@ -171,7 +171,9 @@ function Movie() {
                           style={{ maxWidth: "300px" }}
                         />
 
-                        <div className="mt-1">Original Movie Poster</div>
+                        <div className="mt-1 text-secondary">
+                          Original Movie Poster
+                        </div>
                       </div>
                     </div>
                   </div>

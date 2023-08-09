@@ -10,7 +10,7 @@
 </ul>
 </p>
 
-# About:::
+# About:
 
 <p>
 This group project has been an exciting journey of teamwork and synergy, yet pushed us to further our knowledge boundaries and improve our skills. We embarked on this project by establishing effective communication channels and task management systems. To maximize our efficiency, we utilized a Trello board to track our progress and coordinated our efforts through GitHub commits.
@@ -40,6 +40,6 @@ And after a lot of work, we proudly present TerrorFlick: a React application des
 
 <a href="https://github.com/zalazimov/single_resource_horror">GitHub Repository</a>
 
-<!--Backend <a href="https://-----.netlify.app/">Netlify</a> -->
+<a href="https://terrorflick-backend.onrender.com">OnRender</a>
 
-<!--Frontend <a href="https://-----.netlify.app/">Netlify</a> -->
+<a href="https://terrorflick.netlify.app/">Netlify</a>
