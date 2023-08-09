@@ -21,6 +21,15 @@ export async function fetchIndexData() {
   }
 }
 
+export async function fetchIndexDataDesc() {
+  try {
+    const result = await axios.get(`${API2}/movies/limit/desc/500`);
+    return result;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
 export async function fetchMovieById(id) {
   try {
     const result = await axios.get(`${API2}/movies/card/${id}`);

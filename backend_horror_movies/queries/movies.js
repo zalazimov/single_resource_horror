@@ -28,6 +28,16 @@ async function getMoviesLimit(args) {
         });
     return someMovie;
 }
+
+async function getMoviesLimDesc(args) {
+    const someMovie = await db
+        .any(`select * from horrmovies ORDER BY id desc limit ${args}`)
+        .then((res) => res)
+        .catch((e) => {
+            return e;
+        });
+    return someMovie;
+}
 //get movie by original title and release_date
 async function getMoviesByTD(title, date) {
     const someMovie = await db
@@ -191,7 +201,7 @@ async function updateRow(args, id) {
         const Row = await db.any(
             `UPDATE horrmovies SET ${arr
                 .map((item, i) => {
-                    return `${item} = '${typeof vals[i] == 'string' ? replaceSpecialChars(vals[i]) : vals[i]}'`;
+                    return `${item} = '${typeof vals[i] == 'string' && item !== 'genre_names' ? replaceSpecialChars(vals[i]) : vals[i]}'`;
                 })
                 .join(", ")} where
         id = $1 RETURNING *`,
@@ -209,6 +219,7 @@ module.exports = {
     getMoviesByTitle,
     getMoviesBySubstring,
     getMoviesLimit,
+    getMoviesLimDesc,
     getMoviesById,
     getMovieCard,
     getHomeInfo,

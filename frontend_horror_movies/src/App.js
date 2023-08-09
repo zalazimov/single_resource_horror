@@ -16,13 +16,10 @@ function App() {
   const Index = React.lazy(() => import("./components/DBIndex/Index"));
   const SearchRes = React.lazy(() => import("./components/SearchRes/SearchRes"));
 
-  const [movie, setMovieById] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState(null);
 
   const movieContextValue = {
-    movie,
-    setMovieById,
     isLoading,
     setIsLoading,
     posterImage,
