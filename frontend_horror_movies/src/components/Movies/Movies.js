@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { fetchMoviesData } from "../api";
 import MainImage from "./MainImage";
 import Overlay from "../../common/Overlay";
+import "./Movies.css";
 
 function Movies() {
   const navigate = useNavigate();
@@ -29,7 +30,7 @@ function Movies() {
 
   return (
     <Overlay isLoading={isLoading}>
-      <div className="container">
+      <div className="container min-vh-100">
         <>{movies && <MainImage images={movies} />}</>
         <section className="row text-center">
           {movies &&
