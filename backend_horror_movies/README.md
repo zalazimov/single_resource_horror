@@ -7,6 +7,8 @@ http GET localhost:3001/movies/limit/5
 
 http GET localhost:3001/movies/limit/desc/5
 
+http GET localhost:3001/movies title==searchquery
+
 http GET localhost:3001/collections
 
 http GET localhost:3001/collections/5
