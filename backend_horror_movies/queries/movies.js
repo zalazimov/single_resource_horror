@@ -1,12 +1,4 @@
 const db = require("../db/dbConfig");
-
-function replaceSpecialChars(inputString) {
-    // Replace single quotes, double quotes, and triple quotes with two single quotes
-    const replacedString = inputString.replace(/'|"|"""|,/g, '');
-
-    return replacedString;
-}
-
 //get all movies
 async function getMovies() {
     const someMovie = await db
@@ -165,17 +157,16 @@ async function getCollById(id) {
 
 //creating a new movie entry
 async function addRow(args) {
-    let keyarr = Object.keys(args)
+    let vals = Object.values(args)
     try {
-        const Row = await db.any(`INSERT INTO horrmovies (${keyarr.join(
+        const Row = await db.any(`INSERT INTO horrmovies (${Object.keys(args).join(
             ","
         )}) 
-        VALUES (${Object.values(args)
+        VALUES (${vals
                 .map((item, i) => {
-                    if (typeof item == 'string' && keyarr[i] !== 'genre_names') return `'${replaceSpecialChars(item)}'`
-                    else return `'${item}'`;
+                    return `$${i+1}`
                 })
-                .join(",")}) RETURNING *`);
+                .join(",")}) RETURNING *`, vals);
         return Row;
     } catch (e) {
         return e;
@@ -197,16 +188,16 @@ async function deleteRow(args) {
 //update a movie entry
 async function updateRow(args, id) {
     let arr = Object.keys(args);
-    let vals = Object.values(args);
+    let vals = [...Object.values(args), id];
     try {
         const Row = await db.any(
             `UPDATE horrmovies SET ${arr
                 .map((item, i) => {
-                    return `${item} = '${typeof vals[i] == 'string' && item !== 'genre_names' ? replaceSpecialChars(vals[i]) : vals[i]}'`;
+                    return `${item} = $${i+1}`
                 })
                 .join(", ")} where
-        id = $1 RETURNING *`,
-            id
+        id = $${vals.length} RETURNING *`,
+            vals
         );
         return Row;
     } catch (e) {
