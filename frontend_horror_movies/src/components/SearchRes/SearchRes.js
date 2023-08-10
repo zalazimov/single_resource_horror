@@ -12,16 +12,19 @@ function SearchRes() {
   const query = searchParams.get("query");
   const { setIsLoading, isLoading, posterImage } = useContext(MovieContext);
   const [results, setResults] = useState(null);
+  const [noresult, setnoResult] = useState(null);
 
   useEffect(() => {
     setIsLoading(true);
+    setResults(null)
+    setnoResult(null)
     fetchBySubstring(query)
       .then((res) => {
         setResults(res.data);
         setIsLoading(false);
       })
       .catch((e) => {
-        setResults(null);
+        setnoResult(true);
         setIsLoading(false);
       });
   }, [query]);
@@ -36,7 +39,7 @@ function SearchRes() {
             )}
           </header>
 
-          {results ? (
+          {results && (
             results
               .slice(0, results.length > 32 ? 32 : results.length)
               .map((movie) => {
@@ -68,7 +71,8 @@ function SearchRes() {
                   </div>
                 );
               })
-          ) : (
+          ) }
+          { noresult && (
             <div className="container text-center mt-5">
               <div className="py-3 text-warning fs-4">
                 {`Search results for: "${query}"`}

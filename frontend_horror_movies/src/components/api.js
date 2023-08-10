@@ -68,14 +68,15 @@ export async function fetchPopularMovies() {
   }
 }
 
-export async function fetchBySubstring(title) {
+export async function fetchBySubstring(title) { 
   try {
     const result = await axios.get(`${API2}/movies/search`, {
       params: { title: title },
     });
     return result;
   } catch (e) {
-    console.log(e);
+    console.log({ message: 'no results',
+                      err: e });
   }
 }
 
