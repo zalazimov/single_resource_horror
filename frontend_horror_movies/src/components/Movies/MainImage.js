@@ -31,19 +31,18 @@ const MainImage = ({ images }) => {
         alt={currentImage.original_title}
         style={{ maxHeight: "80vh" }}
       />
-      <Link to={`/movies/${currentImage.id}`}>
-        <div className="overlay text-warning fs-1 fw-bold mb-5">
-          {currentImage.original_title} ({currentImage.release_date.slice(0, 4)}
-          )
-        </div>
-      </Link>
-      <div className="overview d-none d-md-flex fs-5 mt-5 text-warning">
-        <div className="container">
-          {currentImage.overview && currentImage.overview.length > 300
+        <div className="overlay">
+      <Link to={`/movies/${currentImage.id}`} style={{textDecoration: 'none'}}>
+          <div className="fw-bold text-warning">
+          <h1>{currentImage.original_title} ({currentImage.release_date.slice(0, 4)})</h1>
+          </div>
+            </Link>
+          <div className="overview d-none d-md-block text-warning">
+          <p>{currentImage.overview && currentImage.overview.length > 300
             ? currentImage.overview.slice(0, 300) + "..."
-            : currentImage.overview || currentImage.tagline}
+            : currentImage.overview || currentImage.tagline}</p>
+            </div>
         </div>
-      </div>
       {images.length > 1 && (
         <div>
           <button className="arrow arrow-prev" onClick={handlePrevClick}>

@@ -8,6 +8,7 @@ function Index() {
   const { isLoading, setIsLoading } = useContext(MovieContext);
   const [movies, setMovies] = useState(null);
   const [order, setOrder] = useState(false);
+  const [noresult, setnoResult] = useState(null);
 
   useEffect(() => {
     setIsLoading(true);
@@ -17,21 +18,21 @@ function Index() {
           setIsLoading(false);
           setMovies(res.data);
         })
-        .catch((e) => console.log(e));
+        .catch((e) => setnoResult(true));
     } else {
       fetchIndexData()
         .then((res) => {
           setIsLoading(false);
           setMovies(res.data);
         })
-        .catch((e) => console.log(e));
+        .catch((e) => setnoResult(true));
     }
   }, [order]);
 
   return (
     <Overlay isLoading={isLoading}>
       <div className="container pt-2">
-        {movies ? (
+        {movies && (
           <>
             <h3 className="text-warning text-center">Movie DataBase</h3>
 
@@ -43,7 +44,7 @@ function Index() {
                       ID
                       <img
                         src={updown}
-                        style={{ width: "25px", height: "33px" }}
+                        style={{ width: "25px", height: "33px", cursor: 'pointer' }}
                         alt="updown"
                         onClick={() => setOrder(!order)}
                       />
@@ -84,11 +85,11 @@ function Index() {
               </table>
             </div>
           </>
-        ) : (
-          <div className="alert alert-primary" role="alert">
+        ) }
+        { noresult && <div className="alert alert-primary" role="alert">
             Unable to load info
           </div>
-        )}
+        }
       </div>
     </Overlay>
   );
