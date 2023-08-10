@@ -59,8 +59,8 @@ const checkGenreNames = (req, res, next) => {
 const checkPut = (req, res, next) => {
   let arr = Object.keys(req.body);
   if (arr.length == 0 || (req.body && req.body.hasOwnProperty('genre_names') && !isValidCSV(req.body.genre_names))) {
-    if (arr.length == 0) res.status(400).json({ err: "make new update body" });
-    else res.status(400).json({ err: "genre names must be csv" });
+    if (arr.length == 0) { res.status(400).json({ err: "make new update body" }); }
+    res.status(400).json({ err: "genre names must be csv" });
   } else {
     for (let n of arr) {
       if (
