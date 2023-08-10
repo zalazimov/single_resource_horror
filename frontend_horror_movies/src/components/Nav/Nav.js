@@ -18,9 +18,13 @@ function Nav() {
           className="d-inline-block align-top px-4"
         />
       </Link>
-      <div className="collapse navbar-collapse d-flex flex-wrap" id="navbarNav">
-        <ul className="navbar-nav ml-auto">
-          <li className="nav-item px-5">
+
+      <div
+        className="links-list collapse navbar-collapse d-flex flex-wrap"
+        id="navbarNav"
+      >
+        <ul className="navbar-nav ml-auto d-flex flex-wrap">
+          <li className="nav-item px-3">
             <Link
               className="nav-link text-warning"
               to="/"
@@ -29,7 +33,7 @@ function Nav() {
               Home
             </Link>
           </li>
-          <li className="nav-item px-5">
+          <li className="nav-item px-3">
             <Link
               className="nav-link text-warning"
               to="/index"
@@ -38,7 +42,7 @@ function Nav() {
               Index
             </Link>
           </li>
-          <li className="nav-item px-5">
+          <li className="nav-item px-3">
             <Link
               className="nav-link text-warning"
               to="/create"

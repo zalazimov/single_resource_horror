@@ -11,7 +11,7 @@ import EditMovie from "../EditMovie/EditMovie";
 import "./Movie.css";
 
 function Movie() {
-  const { isLoading, setIsLoading, posterImage, formatDate, data, } =
+  const { isLoading, setIsLoading, posterImage, formatDate, data } =
     useContext(MovieContext);
   const { id } = useParams();
   const stockposter = posterImage();
@@ -76,7 +76,7 @@ function Movie() {
   return (
     <FormContext.Provider value={formContextValue}>
       <Overlay isLoading={isLoading}>
-        <div className="container">
+        <div>
           {movie && (
             <>
               {" "}
@@ -167,8 +167,7 @@ function Movie() {
                               : stockposter
                           }
                           alt={movie.original_title}
-                          className="img-fluid rounded-1 text-align-center"
-                          style={{ width: '22vw', height: '29vw' }}
+                          className="poster img-fluid rounded-1 text-align-center"
                         />
 
                         <div className="mt-1 text-secondary">
