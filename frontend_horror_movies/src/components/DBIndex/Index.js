@@ -77,7 +77,7 @@ function Index() {
                       <td>{item.runtime.toString() + "m"}</td>
                       <td>{item.genre_names}</td>
                       <td>{item.vote_average}</td>
-                      <td>${item.budget}</td>
+                      <td>${item.budget??'0'}</td>
                     </tr>
                   ))}
                 </tbody>
